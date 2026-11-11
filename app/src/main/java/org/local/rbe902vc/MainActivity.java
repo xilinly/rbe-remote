@@ -149,7 +149,7 @@ public final class MainActivity extends Activity {
     private static final byte[] RTK_COMPANY_DATA = hex("383802000001");
 
     /**
-     * Advertisement + scan response of the real remote (00:E0:29:EC:F2:32), captured 2026-11-10
+     * Advertisement + scan response of the real remote (00:E0:29:xx:xx:xx), captured 2026-11-10
      * while it was held in pairing mode (设置+音量减). Used when no capture file is available yet.
      */
     private static final String REMOTE_ADV_FALLBACK =
@@ -693,7 +693,7 @@ public final class MainActivity extends Activity {
             if (mode == AdvMode.CLONE) {
                 if (captures.isEmpty()) loadCapturesFromDisk();
                 String target = captures.isEmpty()
-                        ? "00:E0:29:EC:F2:32|CH BT RC|" + REMOTE_ADV_FALLBACK
+                        ? "00:E0:29:xx:xx:xx|CH BT RC|" + REMOTE_ADV_FALLBACK
                         : pickCloneTarget();
                 AdvertiseData[] pair = cloneAdvertise(target);
                 packet = pair[0];

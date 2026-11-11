@@ -8,11 +8,11 @@
 
 ## 实测证据（电视侧日志）
 
-配对与建链（电视 logcat，手机 RPA `69:5D:76:1B:17:F5`）：
+配对与建链（电视 logcat，手机 RPA `69:5D:76:xx:xx:xx`）：
 
 ```
 BluetoothRTKAutoPairService: [Good Signal(0 - -48 > 50)] RCU ... rssi[-48]
-BluetoothRTKAutoPairService: [FOUND] 69:5D:76:1B:17:F5
+BluetoothRTKAutoPairService: [FOUND] 69:5D:76:xx:xx:xx
 BluetoothBondStateMachine: Bond State Change Intent OldState: 11 NewState: 12
 BluetoothRTKAutoPairService: Sdp or Gatt search success(1)  Service=00001812-0000-1000-8000-00805f9b34fb
 /hidraw0 open succussfully!
@@ -56,7 +56,7 @@ bta_hh_le_write_rpt: ReportID: 0xfa Data Len: 20     ← 语音服务写输出�
 
 ## 实体遥控器的完整广播（克隆源）
 
-地址 `00:E0:29:EC:F2:32`，名称 `CH BT RC`，AD 记录：
+地址 `00:E0:29:xx:xx:xx`，名称 `CH BT RC`，AD 记录：
 
 ```
 0201050303121809ff0d003838020000010909434820425420524312ff0d00ffff52424635303056435632303237
@@ -97,7 +97,7 @@ adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc
 
 ```
 adb shell cat /sdcard/Android/data/org.local.rbe902vc/files/state.txt
-# connected=BC:1C:81:85:F0:0F notify=true advertising=false note=cccd char=00002a4d-... value=0100
+# connected=BC:1C:81:xx:xx:xx notify=true advertising=false note=cccd char=00002a4d-... value=0100
 ```
 
 ## 用法
