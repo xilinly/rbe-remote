@@ -71,6 +71,8 @@ import java.util.UUID;
  */
 public final class MainActivity extends Activity {
     private static final String REMOTE_NAME = "CH BT RC";
+    /** 电源模式下的蓝牙名：故意不带 "CH BT RC"，让电视回落到 Generic.kl 才能映射 POWER。 */
+    private static final String POWER_NAME = "RBE902VC";
     private static final String LOG_TAG = "RBE_SCAN";
     private static final int PERMISSION_REQUEST = 1;
     private static final int SCAN_PERMISSION_REQUEST = 2;
@@ -179,6 +181,8 @@ public final class MainActivity extends Activity {
     private BluetoothDevice connected;
     private String formerName;
     private boolean notificationsEnabled;
+    /** 电源一键关机：切到电源档后，等电视订阅完成再发 System Power Down。 */
+    private boolean pendingPower;
     private boolean advertising;
     private boolean scanning;
     private boolean scanSession;
@@ -207,6 +211,18 @@ public final class MainActivity extends Activity {
             bytes[i] = (byte) Integer.parseInt(value.substring(i * 2, i * 2 + 2), 16);
         }
         return bytes;
+    }
+
+    /** 当前该用的蓝牙名：厂商模式用 "CH BT RC"，电源模式换一个没有对应 .kl 的名字。 */
+    private String activeName() {
+        int pid = prefs == null ? 0x0300 : prefs.getInt("pid", 0x0300);
+        return pid == 0x0300 ? REMOTE_NAME : POWER_NAME;
+    }
+
+    /** PnP ID 值：bit0=2（USB-IF），VID 0x0416，PID 取 prefs（默认 0x0300），版本 0x0111。 */
+    private byte[] pnpIdValue() {
+        int pid = prefs == null ? 0x0300 : prefs.getInt("pid", 0x0300);
+        return new byte[]{2, 0x16, 0x04, (byte) (pid & 0xFF), (byte) ((pid >> 8) & 0xFF), 0x11, 0x01};
     }
 
     private static BluetoothGattCharacteristic readOnly(UUID id, byte[] value) {
@@ -249,7 +265,7 @@ public final class MainActivity extends Activity {
 
         // ------------------------------------------------ 遥控器面板（按实体遥控器布局）
         root.addView(header("遥控器"));
-        root.addView(rowEven(button("电源", v -> sendPower()),
+        root.addView(rowEven(button("电源（BLE 关机）", v -> powerOffViaBle()),
                 button("设置", v -> sendKeys(SETTINGS_KEY))));
 
         root.addView(rowEven(button("菜单", v -> sendKeys(MENU_KEY)),
@@ -743,8 +759,11 @@ public final class MainActivity extends Activity {
             show("这台手机当前不支持 BLE 外设广播，无法模拟实体遥控器。"); return;
         }
         formerName = adapter.getName();
-        if (!REMOTE_NAME.equals(formerName) && !adapter.setName(REMOTE_NAME)) {
-            show("无法临时设置蓝牙名称 CH BT RC，请检查系统限制。"); return;
+        // 电源模式（PID 非 0x0300）时故意换名字：电视的 EventHub 优先按名字找 CH_BT_RC.kl，
+        // 名字一换就回落到 Generic.kl，那里 key 116 POWER 是开着的。
+        String wantedName = activeName();
+        if (!wantedName.equals(formerName) && !adapter.setName(wantedName)) {
+            show("无法临时设置蓝牙名称 " + wantedName + "，请检查系统限制。"); return;
         }
         server = manager.openGattServer(this, callback);
         if (server == null) {
@@ -874,9 +893,11 @@ public final class MainActivity extends Activity {
                 BluetoothGattService.SERVICE_TYPE_PRIMARY);
         info.addCharacteristic(readOnly(MANUFACTURER, "CHANGHONG".getBytes(StandardCharsets.UTF_8)));
         info.addCharacteristic(readOnly(MODEL, "RBE902VC".getBytes(StandardCharsets.UTF_8)));
-        // PnP ID: vendor source USB-IF, VID 0x0416, PID 0x0300, version 0x0111.
-        info.addCharacteristic(readOnly(PNP_ID,
-                new byte[]{2, 0x16, 0x04, 0, 0x03, 0x11, 0x01}));
+        // PnP ID: vendor source USB-IF, VID 0x0416, PID from prefs (default 0x0300), version 0x0111.
+        // PID 0x0300 命中电视的 Vendor_0416_Product_0300.kl（里面对 POWER 是注释掉的）；
+        // 换成电视上没有对应键位表的 PID（例如 0x0301），Android 会回落到 Generic.kl，
+        // 而 Generic.kl 里 key 116 POWER 是开着的 —— 这是 BLE 关机的唯一通道。
+        info.addCharacteristic(readOnly(PNP_ID, pnpIdValue()));
         services.add(info);
 
         BluetoothGattService battery = new BluetoothGattService(BATTERY_SERVICE,
@@ -1043,7 +1064,10 @@ public final class MainActivity extends Activity {
                 descriptor.setValue(value);
                 if (descriptor.getCharacteristic() == keyboardReport && CLIENT_CONFIG.equals(descriptor.getUuid())) {
                     notificationsEnabled = Arrays.equals(value, BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                    if (notificationsEnabled) show("电视已订阅遥控按键，可以测试方向与音量。");
+                    if (notificationsEnabled) {
+                        show("电视已订阅遥控按键，可以测试方向与音量。");
+                        firePendingPower();
+                    }
                 }
                 writeState("cccd char=" + descriptor.getCharacteristic().getUuid()
                         + " desc=" + descriptor.getUuid()
@@ -1219,14 +1243,59 @@ public final class MainActivity extends Activity {
         if (systemReport == null) { show("遥控器未启动：先点“连接电视（克隆广播）”。"); return; }
         if (!canSend()) return;
         BluetoothDevice target = connected;
+        // 报表 9 的 System Power Down 是内核唯一会映射成 KEY_POWER(116) 的用法；
+        // 至于 116 能不能变成 KEYCODE_POWER(26)，取决于电视给这个设备选哪张键位表：
+        // 厂商表（Vendor_0416_Product_0300.kl / CH_BT_RC.kl）把 116 注释了 → keyCode 0；
+        // 换成 Generic.kl（改 PnP PID + 改蓝牙名）后 `key 116 POWER` 生效 → 真正关机。
         int result = server.notifyCharacteristicChanged(target, systemReport, false, new byte[]{1});
-        writeState("power system usage=0x81 result=" + result);
+        writeState("power system usage=0x81 pid=0x"
+                + Integer.toHexString(prefs.getInt("pid", 0x0300)) + " result=" + result);
         if (result != BluetoothStatusCodes.SUCCESS) { show("发送电源失败，状态 " + result); return; }
-        show("已发送电源（System Power Down）。电视应当待机；开机要用实体遥控器。");
+        show("已发送电源（System Power Down）。");
         main.postDelayed(() -> {
             if (server != null && connected == target)
                 server.notifyCharacteristicChanged(target, systemReport, false, new byte[]{0});
         }, 110);
+    }
+
+    /**
+     * 一键 BLE 关机：厂商键位表把 116 注释掉了，所以要临时切到「电源档」——
+     * PnP PID 0x0301 + 蓝牙名 RBE902VC，电视便会回落到 Generic.kl，那里 key 116 POWER 是开着的。
+     * 切档要重连，所以这里先停广播、改档、再广播，等电视连上并订阅后自动发一次 System Power Down。
+     */
+    void powerOffViaBle() {
+        prefs.edit().putInt("pid", 0x0301).apply();
+        pendingPower = true;
+        stopRemote();
+        show("正在切到电源档（PID 0x0301 / 名称 RBE902VC），等电视重连后自动发送关机…");
+        writeState("power-off requested");
+        requestStart(AdvMode.CLONE);
+    }
+
+    /** 连接并订阅之后调用：真正下发 System Power Down。 */
+    private void firePendingPower() {
+        if (!pendingPower || !notificationsEnabled) return;
+        pendingPower = false;
+        sendPower();
+        // 电视马上断电，名字可以直接恢复，免得手机蓝牙名留在 RBE902VC。
+        main.postDelayed(this::restoreName, 1500);
+        prefs.edit().putInt("pid", 0x0300).apply();
+    }
+
+    /** adb 调试用：换 PnP PID（例如 `--es pid 0301`），换完要重新“连接电视”才生效。 */
+    void setPid(String hex) {
+        int pid;
+        try {
+            String value = hex.trim();
+            if (value.startsWith("0x") || value.startsWith("0X")) value = value.substring(2);
+            pid = Integer.parseInt(value, 16);
+        } catch (NumberFormatException e) {
+            show("pid 格式不对：" + hex);
+            return;
+        }
+        prefs.edit().putInt("pid", pid).apply();
+        writeState("pid=0x" + Integer.toHexString(pid));
+        show("PnP PID = 0x" + Integer.toHexString(pid) + "，先“停止”再“连接电视”才生效。");
     }
 
     /** 备用电源 1：Consumer 报表 3 的 usage 0x30（Power），实测在长虹这台电视上没有反应。 */

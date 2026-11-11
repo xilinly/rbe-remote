@@ -24,12 +24,14 @@ public class SendReceiver extends BroadcastReceiver {
         String adv = intent.getStringExtra("adv");
         String consumer = intent.getStringExtra("consumer");
         String wifi = intent.getStringExtra("wifi");
+        String pid = intent.getStringExtra("pid");
         boolean power = intent.getBooleanExtra("power", false);
         boolean stop = intent.getBooleanExtra("stop", false);
         if (usages != null) activity.sendHex(usages);
         if (adv != null) activity.startAdvertising(adv);
         if (power) activity.sendPower();
         if (consumer != null) activity.sendConsumerHex(consumer);
+        if (pid != null) activity.setPid(pid);
         if (wifi != null) {
             if ("status".equals(wifi)) activity.tvStatus();
             else activity.tvPower(wifi);

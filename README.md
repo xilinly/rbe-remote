@@ -100,45 +100,38 @@ adb shell cat /sdcard/Android/data/org.local.rbe902vc/files/state.txt
 # connected=BC:1C:81:xx:xx:xx notify=true advertising=false note=cccd char=00002a4d-... value=0100
 ```
 
-## 电源：BLE 到不了，WiFi 那条是唯一可用的
+## 电源：BLE 关机已经打通（走 Generic 键位表）
 
-这台机器把 KEYCODE_POWER(26) 映射成整机断电，但 BLE 这条路在 framework 层被卡死，实测证据如下：
+这台机器把 KEYCODE_POWER(26) 映射成**整机断电**。BLE 关卡在键位表上，逐个试过：
 
-1. 键盘报表发扫描码 116（0x74）：`/system/usr/keylayout/Vendor_0416_Product_0300.kl` 里 `key 116 POWER`、`key 152 POWER`、`key 356 "KEY_POWER2"` 全是注释，keyCode 恒为 0。
-2. Consumer 页 0x30（Power）：电视能收到（dongle 服务日志 `[4 bytes]:03 03 30 00` → `recv report id: 03`），但内核没把它映射成键。
-3. System Control 报表 9 的 Generic Desktop **0x81 System Power Down**：**内核确实收到了**——
-   `interceptKeyTi … scancode=116 … deviceName=CH BT RC`，但同一行 `keyCode=0`，因为键位表里 116 没映射。
-   想补映射有两条路，都被这台机器堵死：
-   - `/system` 是只读的，`mount -o remount,rw /system` 返回 `Operation not permitted`（adbd 已是 root、CapEff 全开、SELinux Disabled，仍然拒绝）；
-   - `/data/system/devices/keylayout/` 覆盖目录这个 ROM 不认，EventHub 日志明确写着它解析到了 `/system/usr/keylayout/...`。
-   把 PnP ID 改成别的 VID/PID 能让它回落到 `Generic.kl`（那里 `key 116 POWER` 是开着的），但那样换源/设置/观影/数字键这些厂商键位会全部失效，不划算。
+| 试法 | 结果 |
+| --- | --- |
+| 键盘报表发扫描码 116（`0x74`） | `Vendor_0416_Product_0300.kl` 里 `key 116 POWER` 是注释的，keyCode 恒 0；而且用法码并不等于扫描码（0x74 被内核映射成 134） |
+| Consumer 页 0x30（Power） | 电视能收到（`recv report id: 03`），但内核不认成键 |
+| System Control 报表 9 的 **0x81 System Power Down** | 内核给出 `MSC_SCAN 00010081` → `EV_KEY KEY_POWER`，即 scancode 116；但厂商键位表把它映射成 keyCode 0 |
 
-所以电源只能走电视本机的按键注入。这台电视上一直跑着一个 busybox httpd（姊妹工程 webremote，装在 `/data/local/webremote`，端口 8080），它的 `cgi-bin/power` 就是 `input keyevent 26`：
+想给 116 补映射：`/system` 只读（`mount -o remount,rw /system` 返回 `Operation not permitted`，root + 全 Caps + SELinux Disabled 也拒），`/data/system/devices/keylayout/` 这个 ROM 不认（EventHub 明确解析到 `/system/usr/keylayout/...`）。
 
-```
-GET http://<电视IP>:8080/cgi-bin/power?p=<令牌>&a=off|sleep|wake
-GET http://<电视IP>:8080/cgi-bin/status?p=<令牌>
-```
+**最后走通的做法：让电视挑 `Generic.kl`。** Android 的键位表查找顺序是 `Vendor_<vid>_Product_<pid>.kl` → 设备名 `.kl` → `Generic.kl`，而 `Generic.kl` 里 `key 116 POWER` 是开着的。所以：
 
-APP 的「网络」区就是打这个接口，**IP 与令牌都存在 SharedPreferences 里，源码里不写死令牌**；也可以用 adb 预置：
+1. PnP ID 换成电视上没有对应键位表的 `0x0416:0x0301`（ADR 里仍然带原有广播，autopair 照样认）；
+2. 蓝牙名从 `CH BT RC` 改成 `RBE902VC`（否则 EventHub 会按名字命中 `CH_BT_RC.kl`）；
+3. 电视新建的节点 `uhid 0005:0416:0301` 解析到 `/system/usr/keylayout/Generic.kl`；
+4. 发报表 9 的 System Power Down → 内核 scancode 116 → Generic.kl → **KEYCODE_POWER(26)** → ShutdownThread 整机断电。
 
-```
-adb shell am start -n org.local.rbe902vc/.MainActivity --es tvHost 192.168.3.17 --es tvToken <令牌>
-adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --es wifi status
-adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --es wifi sleep
-```
-
-- `a=off` → 真关机（`input keyevent 26`，兜底 `reboot -p`）。整机断电，IP 也不通，只能红外遥控开机。
-- `a=sleep` → 只关背光，网络和进程都在，能秒醒。
-- `a=wake` → 恢复亮度 + `input keyevent 224`。
-
-换令牌用仓库里的 `tools/set-tv-token.ps1`（adb 可达电视时跑）：
+实测证据：
 
 ```
-pwsh -File tools/set-tv-token.ps1 -Token <新令牌> -Serial 192.168.3.17:5555
+getevent: EV_MSC MSC_SCAN 00010081 / EV_KEY KEY_POWER DOWN / UP
+电视 logcat: reportInfo:scancode=116;keyCode=26
+            I/ShutdownThread: Bluetooth turned off. / Shutting down MountService
 ```
 
-它会改写电视上 `cgi-bin/*` 里的 `p=<令牌>`，再用 `cgi-bin/status` 自检。注意网页版 UI 的令牌在 `index.html` 的 `var TOKEN = '...'` 里，脚本会跳过它，需要单独改（`tools/fix_web_token.sh` 就是干这个的）。
+APP 里是一个按钮 **「电源（BLE 关机）」**：它自动切档（PID 0x0301 + 名字 RBE902VC）、重连、等电视订阅完成后发一次 System Power Down，然后把 PID 和蓝牙名切回 `0x0300 / CH BT RC`。
+
+**开机做不到**：本机没有红外发射器，电视断电后只能用实体遥控器开。这也是为什么在「电源档」下厂商键位（换源/设置/导航/数字）会失效——那一档只用来关那一下，发完立刻切回。
+
+> 电视上另有一个姊妹工程 webremote（busybox httpd + `input keyevent 26`），曾经是唯一能关机的手段；现在 BLE 已经不需要它了，仓库里的 WiFi 按钮只是保留的备用通道。
 
 ## 用法
 
