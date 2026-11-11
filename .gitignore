@@ -1,0 +1,28 @@
+# Build toolchain and Android SDK are local downloads, not source.
+/toolchain/
+/sdk/
+/build_apk/
+/build_manual/
+/build_scan_v2/
+/build_final/
+
+# Generated APKs, v1/v2 signature blocks.
+/*.apk
+/*.idsig
+
+# Runtime artefacts: TV/phone logs, BLE captures, screenshots, sweeps.
+# They contain Bluetooth addresses and the TV's own logs, so they stay out of the repo.
+/*.log
+/*.txt
+/*.png
+/tvpoll/
+/sweep/
+/sweep2/
+
+# Binaries pulled off the TV for reverse engineering (vendor code, not ours to publish).
+/xiriservice
+/libiflyblesvc_xiri_d.so
+
+# OS clutter
+Thumbs.db
+desktop.ini
