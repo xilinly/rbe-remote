@@ -141,7 +141,6 @@ public final class MainActivity extends Activity {
     // 所以 BLE 电源无论走不走得通，这条 HTTP 通道是确定可用的按键注入点。
     private static final String TV_DEFAULT_HOST = "192.168.3.17";
     private static final int TV_PORT = 8080;
-    private static final String TV_TOKEN = "ch551";
 
     // From /etc/bluetooth/rtkbt_autopair_config.xml on the TV: the autopair plugin matches an
     // advertisement whose manufacturer specific data begins with these eight bytes.
@@ -166,6 +165,7 @@ public final class MainActivity extends Activity {
     private TextView detail;
     private EditText custom;
     private EditText tvHost;
+    private EditText tvToken;
     private android.content.SharedPreferences prefs;
     private BluetoothAdapter adapter;
     private BluetoothLeAdvertiser advertiser;
@@ -276,10 +276,15 @@ public final class MainActivity extends Activity {
         tvHost.setText(prefs.getString("tvHost", TV_DEFAULT_HOST));
         tvHost.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
         root.addView(tvHost);
+        tvToken = new EditText(this);
+        tvToken.setHint("webremote 令牌（电视上 cgi-bin 里的 p=…）");
+        tvToken.setText(prefs.getString("tvToken", ""));
+        tvToken.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+        root.addView(tvToken);
         root.addView(rowEven(button("关机（WiFi）", v -> tvPower("off")),
                 button("休眠（WiFi）", v -> tvPower("sleep"))));
         root.addView(rowEven(button("唤醒（WiFi）", v -> tvPower("wake")),
-                button("状态（WiFi）", v -> tvCall("/cgi-bin/status?p=" + TV_TOKEN, null))));
+                button("状态（WiFi）", v -> tvCall("/cgi-bin/status?p=" + tvTokenValue(), null))));
 
         root.addView(header("调试"));
         root.addView(rowEven(button("广播 HID", v -> requestStart(AdvMode.HID)),
@@ -365,12 +370,24 @@ public final class MainActivity extends Activity {
         return value.replace("http://", "").replace("/", "");
     }
 
+    /** 电视上 webremote 的访问令牌；不写死在源码里，随输入框保存，仓库里就不会泄。 */
+    private String tvTokenValue() {
+        String value = tvToken == null ? "" : tvToken.getText().toString().trim();
+        return value.isEmpty() ? prefs.getString("tvToken", "") : value;
+    }
+
     private void tvPower(String action) {
         prefs.edit().putString("tvHost", tvHostValue()).apply();
+        prefs.edit().putString("tvToken", tvTokenValue()).apply();
+        String token = tvTokenValue();
+        if (token.isEmpty()) {
+            show("先在下面填 webremote 令牌（电视 /data/local/webremote/cgi-bin 里 p= 后面那串）");
+            return;
+        }
         String hint = "off".equals(action)
                 ? "已请求关机（KEYCODE_POWER 26 在这台机型上是整机断电，电视会立刻掉网）"
                 : "已请求 " + action;
-        tvCall("/cgi-bin/power?p=" + TV_TOKEN + "&a=" + action, hint);
+        tvCall("/cgi-bin/power?p=" + token + "&a=" + action, hint);
     }
 
     /**

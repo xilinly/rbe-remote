@@ -100,17 +100,46 @@ adb shell cat /sdcard/Android/data/org.local.rbe902vc/files/state.txt
 # connected=BC:1C:81:xx:xx:xx notify=true advertising=false note=cccd char=00002a4d-... value=0100
 ```
 
+## 电源：BLE 与电视上的 webremote
+
+这台机器把 KEYCODE_POWER(26) 映射成整机断电，但 BLE 那条路到不了：
+
+- `/system/usr/keylayout/Vendor_0416_Product_0300.kl` 里 `key 116 POWER`、`key 152 POWER`、`key 356 "KEY_POWER2"` 全是注释，键盘报表发扫描码 116 不产生 keycode；
+- Consumer 页 0x30（Power）实测没有反应；
+- 现在用报表 9 里的 Generic Desktop **0x81 System Power Down**：内核 `hid-input` 对 GENDESK 0x81 直接 `map_key(KEY_POWER)`，绕开 keylayout。报表映射因此在原来的 169 字节后追加了 26 字节（report 9）。
+
+确定能用的电源方案是电视本机上的 busybox httpd（姊妹工程 webremote，装在 `/data/local/webremote`，端口 8080）：
+
+```
+GET http://<电视IP>:8080/cgi-bin/power?p=<令牌>&a=off|sleep|wake
+GET http://<电视IP>:8080/cgi-bin/status?p=<令牌>
+```
+
+APP 的「网络」区就是打这个接口，**IP 与令牌都存在 SharedPreferences 里，源码里不写死令牌**：
+
+- `a=off` → 真关机（`input keyevent 26`，兜底 `reboot -p`）。整机断电，IP 也不通，只能红外遥控开机。
+- `a=sleep` → 只关背光，网络和进程都在，能秒醒。
+- `a=wake` → 恢复亮度 + `input keyevent 224`。
+
+换令牌用仓库里的 `tools/set-tv-token.ps1`（adb 可达电视时跑）：
+
+```
+pwsh -File tools/set-tv-token.ps1 -Token <新令牌> -Serial 192.168.3.17:5555
+```
+
+它会改写电视上 `cgi-bin/*` 与 `index.html` 里的 `p=<令牌>`，再用 `cgi-bin/status` 自检，然后把新令牌填进 APP 的「网络」区即可。
+
 ## 用法
 
-1. `adb install -r RBE902VC_BLE_v1.8.apk`，打开应用，允许“附近设备”权限。
+1. `adb install -r RBE902VC_BLE_v2.2.apk`，打开应用，允许“附近设备”权限。
 2. 电视进入“蓝牙遥控器配对”页（同时按住设置＋音量减的提示页）。
-3. 手机点**开始广播（克隆最近捕获包）**，把手机贴到电视底部（< 50 cm）。
+3. 手机点**连接电视（克隆广播）**，把手机贴到电视底部（< 50 cm）。
 4. 电视识别后自动配对建链，界面会显示“电视已连接”，随后“已订阅遥控按键”。此时手机自动停止广播。
 5. 用按键操作电视（方向/音量按住连发）。**停止广播 / 停止扫描**退出。
-6. 如果手机上弹出蓝牙配对码输入框（电视侧的旧行为，已通过停止广播规避），直接取消即可。
+6. 关机走「网络」区的 WiFi 按钮（见上一节）；BLE 的「电源」是报表 9 那条实验通道。
 
 ## 已知未完成
 
 - 语音键（走 `0xFA` 20 字节 dongle 协议，与 `com.iflytek.xiri` 对话）未实现，只做了“能收下电视写来的报表”这一层；用户明确暂时不需要。
-- 红外开机、休眠回连未实现：电视关机后 BLE 断开，需重新走对码流程。
+- 红外开机做不到：本机没有红外发射器，电视断电后只能用实体遥控器开。
 - `Autopair_type 136`、`<Key_pair 1..4>` 含义未解析。
