@@ -294,7 +294,7 @@ public final class MainActivity extends Activity {
                 button("停止", v -> { stopScan(); stopRemote(); })));
 
         // ------------------------------------------------ 网络（WiFi 备用通道）
-        root.addView(header("网络（电视上的 webremote HTTP 服务，电源走这条）"));
+        root.addView(header("网络（备用通道：电视上的 webremote HTTP 服务）"));
         tvHost = new EditText(this);
         tvHost.setHint("电视 IP（默认 " + TV_DEFAULT_HOST + "）");
         tvHost.setText(prefs.getString("tvHost", TV_DEFAULT_HOST));
