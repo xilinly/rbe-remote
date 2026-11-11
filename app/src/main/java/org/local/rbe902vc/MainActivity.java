@@ -221,6 +221,14 @@ public final class MainActivity extends Activity {
         super.onCreate(state);
         current = this;
         prefs = getSharedPreferences("rbe", MODE_PRIVATE);
+        // 允许用 adb 直接预置网络参数：
+        //   am start -n org.local.rbe902vc/.MainActivity --es tvHost 192.168.3.17 --es tvToken rbe9k2
+        if (getIntent() != null) {
+            String host = getIntent().getStringExtra("tvHost");
+            String token = getIntent().getStringExtra("tvToken");
+            if (host != null && !host.isEmpty()) prefs.edit().putString("tvHost", host).apply();
+            if (token != null && !token.isEmpty()) prefs.edit().putString("tvToken", token).apply();
+        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         ScrollView scroll = new ScrollView(this);
         LinearLayout root = new LinearLayout(this);
@@ -376,7 +384,10 @@ public final class MainActivity extends Activity {
         return value.isEmpty() ? prefs.getString("tvToken", "") : value;
     }
 
-    private void tvPower(String action) {
+    /** adb 调试用：直接查一次电视 webremote 的 status。 */
+    void tvStatus() { tvCall("/cgi-bin/status?p=" + tvTokenValue(), null); }
+
+    void tvPower(String action) {
         prefs.edit().putString("tvHost", tvHostValue()).apply();
         prefs.edit().putString("tvToken", tvTokenValue()).apply();
         String token = tvTokenValue();
@@ -394,8 +405,7 @@ public final class MainActivity extends Activity {
      * GET 电视上 busybox httpd 的某个 CGI。必须在新线程里跑：API 30 起主线程不允许网络访问。
      * result 原样显示（cgi-bin/status 会回 {"ok":true,"act":"...","up":"..."}）。
      */
-    private void tvCall(String path, String hint) {
-        final String host = tvHostValue();
+    private void tvCall(String path, String hint) {        final String host = tvHostValue();
         final String url = "http://" + host + ":" + TV_PORT + path;
         show("请求 " + url);
         new Thread(() -> {
@@ -1205,7 +1215,7 @@ public final class MainActivity extends Activity {
      * 键盘报表和 Consumer 报表这条路都不通（keylayout 里 POWER 全被注释，Consumer 0x30 也没反应），
      * 所以第 169 字节之后追加了这个 System Control collection。
      */
-    private void sendPower() {
+    void sendPower() {
         if (systemReport == null) { show("遥控器未启动：先点“连接电视（克隆广播）”。"); return; }
         if (!canSend()) return;
         BluetoothDevice target = connected;
@@ -1220,10 +1230,25 @@ public final class MainActivity extends Activity {
     }
 
     /** 备用电源 1：Consumer 报表 3 的 usage 0x30（Power），实测在长虹这台电视上没有反应。 */
-    private void sendPowerConsumer() {
+    void sendPowerConsumer() {
         if (!sendConsumer(POWER_CONSUMER)) return;
         show("已发送 Consumer 0x30（备用）。");
         writeState("power consumer=0x30");
+    }
+
+    /** adb 调试用：按十六进制指定 Consumer usage，例如 `--es consumer 30`。 */
+    void sendConsumerHex(String hex) {
+        int usage;
+        try {
+            String value = hex.trim();
+            if (value.startsWith("0x") || value.startsWith("0X")) value = value.substring(2);
+            usage = Integer.parseInt(value, 16);
+        } catch (NumberFormatException e) {
+            show("consumer usage 格式不对：" + hex);
+            return;
+        }
+        sendConsumer(usage);
+        writeState("power consumer=0x" + Integer.toHexString(usage));
     }
 
     /** 备用电源 2：键盘报表扫描码 116（0x74），keylayout 已注释，必然无反应，只作对照。 */
