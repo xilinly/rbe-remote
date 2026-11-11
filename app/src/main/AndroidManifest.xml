@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.local.rbe902vc"
-    android:versionCode="27"
-    android:versionName="2.7-ble-power">
+    android:versionCode="30"
+    android:versionName="3.0-power-restore">
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -24,6 +24,9 @@
         </receiver>
     </application>
 </manifest>
+
+
+
 
 
 

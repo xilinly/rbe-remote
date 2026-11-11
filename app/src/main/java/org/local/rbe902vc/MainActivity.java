@@ -318,6 +318,8 @@ public final class MainActivity extends Activity {
                 button("复制捕获", v -> copyCaptures())));
         root.addView(rowEven(button("输入源 0xD5", v -> sendKeys(INPUT_KEY)),
                 button("主页备用 0x3E", v -> sendKeys(HOME_FALLBACK))));
+        root.addView(rowEven(button("切到电源档", v -> setProfile(0x0301)),
+                button("切回遥控档", v -> setProfile(0x0300))));
         root.addView(rowEven(button("电源备用 0x74", v -> sendPowerScancode()),
                 button("电源备用 C0x30", v -> sendPowerConsumer())));
 
@@ -759,11 +761,20 @@ public final class MainActivity extends Activity {
             show("这台手机当前不支持 BLE 外设广播，无法模拟实体遥控器。"); return;
         }
         formerName = adapter.getName();
-        // 电源模式（PID 非 0x0300）时故意换名字：电视的 EventHub 优先按名字找 CH_BT_RC.kl，
-        // 名字一换就回落到 Generic.kl，那里 key 116 POWER 是开着的。
+        // 电源模式（PID 非 0x0300）时故意换名字：电视的 EventHub 先按 vendor/product 找键位表，
+        // 找不到再按设备名找；名字一换就回落到 Generic.kl，那里 key 116 POWER 是开着的。
         String wantedName = activeName();
         if (!wantedName.equals(formerName) && !adapter.setName(wantedName)) {
-            show("无法临时设置蓝牙名称 " + wantedName + "，请检查系统限制。"); return;
+            // 荣耀偶尔会拒绝改名（尤其刚改过一次）。等 1.2 秒再试一次，失败才放弃。
+            writeState("setName failed, retrying " + wantedName);
+            show("正在重试设置蓝牙名称 " + wantedName + "…");
+            main.postDelayed(() -> {
+                if (server != null) return;                 // 期间已经起来了就不用管
+                if (adapter.setName(wantedName)) startRemote(mode);
+                else { show("无法设置蓝牙名称 " + wantedName + "，请重启手机蓝牙后重试。");
+                       writeState("setName failed twice " + wantedName); }
+            }, 1200);
+            return;
         }
         server = manager.openGattServer(this, callback);
         if (server == null) {
@@ -996,10 +1007,13 @@ public final class MainActivity extends Activity {
     private final AdvertiseCallback advertiseCallback = new AdvertiseCallback() {
         @Override public void onStartSuccess(AdvertiseSettings settings) {
             advertising = true;
-            show("正在广播 CH BT RC。电视端打开蓝牙配对，靠近电视 1 米内再试。");
+            show("正在广播 " + adapter.getName() + "。电视端打开蓝牙配对，把手机贴到电视底部再试。");
+            writeState("advertising started as " + adapter.getName());
         }
         @Override public void onStartFailure(int errorCode) {
+            advertising = false;
             show("BLE 广播失败，错误码 " + errorCode + "。请检查手机是否支持外设广播。");
+            writeState("advertise failed code=" + errorCode);
         }
     };
 
@@ -1101,6 +1115,7 @@ public final class MainActivity extends Activity {
     // The real remote emits a fresh press every few tens of milliseconds while a direction or
     // volume key stays held, so holding a button here presses again on a timer instead of relying on
     // one long-down report that the TV's input stack may not repeat.
+    private static final long POWER_TIMEOUT_MILLIS = 60000L;
     private static final long REPEAT_DELAY_MILLIS = 350;
     private static final long REPEAT_INTERVAL_MILLIS = 150;
 
@@ -1267,19 +1282,46 @@ public final class MainActivity extends Activity {
         prefs.edit().putInt("pid", 0x0301).apply();
         pendingPower = true;
         stopRemote();
-        show("正在切到电源档（PID 0x0301 / 名称 RBE902VC），等电视重连后自动发送关机…");
+        show("正在切到电源档（PID 0x0301 / 名称 RBE902VC）：把手机贴到电视底部，等它重连后自动关机…");
         writeState("power-off requested");
         requestStart(AdvMode.CLONE);
+        main.removeCallbacks(powerTimeout);
+        main.postDelayed(powerTimeout, POWER_TIMEOUT_MILLIS);
     }
+
+    /** 电源档等了太久：切回遥控档，免得卡在只有电源键能用的状态。 */
+    private final Runnable powerTimeout = new Runnable() {
+        @Override public void run() {
+            if (!pendingPower) return;
+            pendingPower = false;
+            prefs.edit().putInt("pid", 0x0300).apply();
+            stopRemote();
+            show("电源档 60 秒内没等到电视重连，已切回遥控档；把手机贴到电视底部再试一次。");
+            writeState("power timeout, reverted to 0x0300");
+        }
+    };
 
     /** 连接并订阅之后调用：真正下发 System Power Down。 */
     private void firePendingPower() {
         if (!pendingPower || !notificationsEnabled) return;
         pendingPower = false;
+        main.removeCallbacks(powerTimeout);
         sendPower();
-        // 电视马上断电，名字可以直接恢复，免得手机蓝牙名留在 RBE902VC。
-        main.postDelayed(this::restoreName, 1500);
-        prefs.edit().putInt("pid", 0x0300).apply();
+        // 电视马上断电；2 秒后把档位和广播都切回遥控档，免得下次开机时手机还叫 RBE902VC。
+        main.postDelayed(() -> setProfile(0x0300), 2000);
+    }
+
+    /** 手动换档：0x0300 = 遥控档（全键位）、0x0301 = 电源档（Generic 键位表，只剩电源可用）。 */
+    void setProfile(int pid) {
+        prefs.edit().putInt("pid", pid).apply();
+        pendingPower = false;
+        main.removeCallbacks(powerTimeout);
+        stopRemote();
+        requestStart(AdvMode.CLONE);
+        show(pid == 0x0300
+                ? "已切回遥控档（PID 0x0300 / CH BT RC），正在重连…"
+                : "已切到电源档（PID 0x0301 / RBE902VC），正在重连…这一档只有电源键有效。");
+        writeState("profile pid=0x" + Integer.toHexString(pid));
     }
 
     /** adb 调试用：换 PnP PID（例如 `--es pid 0301`），换完要重新“连接电视”才生效。 */
