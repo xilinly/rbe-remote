@@ -7,7 +7,7 @@
             <N4 Tag="LE_LOCAL_KEY_IRK" Type="binary">0ad9aafa92adaae892adda238d66bdf5</N4>
             <N5 Tag="LE_LOCAL_KEY_DHK" Type="binary">9dffda1f0172040e28a69096f22ea302</N5>
             <N6 Tag="LE_LOCAL_KEY_ER" Type="binary">6aa65cc8f1c1850cf1c1ab6c6b6b95a8</N6>
-            <N7 Tag="ScanMode" Type="int">2</N7>
+            <N7 Tag="ScanMode" Type="int">0</N7>
             <N8 Tag="DiscoveryTimeout" Type="int">0</N8>
             <N9 Tag="Name" Type="string">55F9_LJAC_AF92</N9>
         </N1>
@@ -20,7 +20,7 @@
     </N1>
     <N2 Tag="Remote">
         <N1 Tag="54:92:6a:b3:cf:89">
-            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N1 Tag="DevClass" Type="int">0</N1>
             <N2 Tag="Name" Type="string">midea</N2>
             <N3 Tag="DevType" Type="int">2</N3>
             <N4 Tag="AddrType" Type="int">0</N4>
@@ -30,7 +30,7 @@
             <N8 Tag="LmpSubVer" Type="int">0</N8>
         </N1>
         <N2 Tag="d4:27:87:ba:47:d9">
-            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N1 Tag="DevClass" Type="int">0</N1>
             <N2 Tag="Name" Type="string">VWAB_87BA47D8</N2>
             <N3 Tag="DevType" Type="int">2</N3>
             <N4 Tag="AddrType" Type="int">0</N4>
@@ -1297,5 +1297,83 @@
             <N1 Tag="DevClass" Type="int">0</N1>
             <N2 Tag="DevType" Type="int">2</N2>
         </N386>
+        <N387 Tag="5a:01:b0:2a:be:78">
+            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N2 Tag="Name" Type="string">NZpXnegJdiZGFO6fDOgdC2LLM</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N387>
+        <N390 Tag="56:23:ac:97:fb:64">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N390>
+        <N391 Tag="7e:1a:62:d9:37:26">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N391>
+        <N393 Tag="51:9e:94:70:2d:4c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N393>
+        <N394 Tag="7f:b3:67:a6:64:71">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N394>
+        <N395 Tag="70:5a:66:1a:5d:fb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N395>
+        <N400 Tag="11:f0:10:d4:ac:f6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N400>
+        <N402 Tag="70:54:1c:b8:28:d5">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N402>
+        <N404 Tag="45:c8:f2:f5:93:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N404>
+        <N405 Tag="44:4e:92:e9:ba:f2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N405>
+        <N406 Tag="6b:67:18:6c:5a:16">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N406>
+        <N407 Tag="50:0d:e9:9d:6a:f4">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N407>
+        <N408 Tag="66:f4:25:8b:0c:66">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N408>
+        <N409 Tag="61:d4:98:0b:b4:59">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N409>
+        <N410 Tag="7a:b7:32:0c:1e:d6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N410>
+        <N411 Tag="7a:93:30:bf:23:44">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N411>
+        <N414 Tag="48:5e:3b:94:9f:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N414>
+        <N415 Tag="4b:54:6c:ce:d0:9f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N415>
+        <N418 Tag="13:b3:2b:10:88:f1">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N418>
     </N2>
 </Bluedroid>
