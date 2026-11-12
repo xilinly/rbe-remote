@@ -100,7 +100,19 @@ adb shell cat /sdcard/Android/data/org.local.rbe902vc/files/state.txt
 # connected=BC:1C:81:xx:xx:xx notify=true advertising=false note=cccd char=00002a4d-... value=0100
 ```
 
-## 电源：BLE 关机打通（bind mount 打开 key 116 POWER）
+## 电源：BLE 关机方案已放弃（保留调查记录）
+
+> **状态（2026-11-12 决定）：不再做电源键。** 电视上所有相关改动已用 `tools/tv/cleanup_tv.sh` 清除：
+> 键位表 bind mount 全部卸载、`/data/local/keylayout` 与 `/data/system/devices` 删除、
+> `webremote/boot.sh` 的开机钩子已从备份还原。原厂键位表回到 `# key 116 POWER`（注释）状态，
+> 实测 `scancode=183 → keyCode=2001`，厂商键位完好。
+>
+> 结论：这台 ROM 的 EventHub 不接受任何运行期覆盖的键位表（文件 bind mount、目录 bind mount 都会
+> 回落到 `Generic.kl`，`/data/system/devices/keylayout` 干脆不查），而 `/system` 只读、remount 被拒
+> （root + 全 Caps + SELinux Disabled 也返回 `Operation not permitted`）。所以在**不改 /system**
+> 的前提下，无法同时拥有「电源键」和「厂商键位」；选择保留全键位。
+
+以下是最初的调查记录，供以后换机器/换固件时参考。
 
 这台机器把 KEYCODE_POWER(26) 映射成**整机断电**。BLE 关卡全在键位表上，逐条试过：
 

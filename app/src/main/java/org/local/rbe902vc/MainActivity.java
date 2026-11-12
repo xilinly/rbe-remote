@@ -306,8 +306,11 @@ public final class MainActivity extends Activity {
 
         // ------------------------------------------------ 连接与调试
         root.addView(header("连接"));
-        root.addView(rowEven(button("连接电视（克隆广播）", v -> requestStart(AdvMode.CLONE)),
-                button("停止", v -> { stopScan(); stopRemote(); })));
+        root.addView(rowEven(button("连接电视（克隆广播）", v -> {
+            stopPowerWait();               // 普通连接不该继承上一次没完成的关机流程
+            requestStart(AdvMode.CLONE);
+        }),
+                button("停止", v -> { stopPowerWait(); stopScan(); stopRemote(); })));
 
         // ------------------------------------------------ 网络（WiFi 备用通道）
         root.addView(header("网络（备用通道：电视上的 webremote HTTP 服务）"));
@@ -761,6 +764,7 @@ public final class MainActivity extends Activity {
                 AdvertiseData[] pair = cloneAdvertise(target);
                 packet = pair[0];
                 response = pair[1];
+                writeFile("clone.txt", target + "\npacket=" + packet.toString() + "\nresponse=" + response.toString());
             } else if (mode == AdvMode.RTK) {
                 packet = new AdvertiseData.Builder()
                         .addServiceUuid(new ParcelUuid(HID_SERVICE))
@@ -1144,7 +1148,12 @@ public final class MainActivity extends Activity {
                     } else if (reportId == 9) {
                         systemNotificationsEnabled = enabled;
                         powerSubscriptionAt = enabled ? System.currentTimeMillis() : 0L;
-                        if (enabled) show("电视已重新订阅电源报表（报表 9），等待链路稳定后关机…");
+                        if (enabled) {
+                            // 只有真的在等关机时才提示“等待链路稳定后关机”，否则会让人以为要断电。
+                            show(pendingPower
+                                    ? "电视已订阅电源报表（报表 9），等待链路稳定后关机…"
+                                    : "电视已订阅电源报表（报表 9）。");
+                        }
                     }
                 }
                 writeState("cccd report=" + report
@@ -1287,6 +1296,16 @@ public final class MainActivity extends Activity {
      * Mirror the HID state into files/state.txt so a sweep can read it with
      * {@code adb shell run-as org.local.rbe902vc cat files/state.txt} without fighting the screen.
      */
+    /** 调试用：把一段文本写到外部文件目录下的指定文件（不覆盖 state.txt）。 */
+    void writeFile(String name, String content) {
+        File dir = getExternalFilesDir(null);
+        File target = dir == null ? new File(getFilesDir(), name) : new File(dir, name);
+        try (FileOutputStream out = new FileOutputStream(target)) {
+            out.write(content.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ignored) {
+        }
+    }
+
     void writeState(String note) {
         String text = "connected=" + (connected == null ? "none" : connected.getAddress())
                 + " notify=" + notificationsEnabled
@@ -1328,6 +1347,7 @@ public final class MainActivity extends Activity {
     /** adb entry point for broadcasting without touching the screen: hid | rtk | clone. */
     void startAdvertising(String mode) {
         if (mode == null) return;
+        stopPowerWait();   // 调试广播同样不该继承未完成的关机流程
         switch (mode.toLowerCase()) {
             case "hid": requestStart(AdvMode.HID); break;
             case "rtk": requestStart(AdvMode.RTK); break;
