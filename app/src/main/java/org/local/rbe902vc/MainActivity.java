@@ -73,6 +73,8 @@ public final class MainActivity extends Activity {
     private static final String REMOTE_NAME = "CH BT RC";
     /** 电源模式下的蓝牙名：故意不带 "CH BT RC"，让电视回落到 Generic.kl 才能映射 POWER。 */
     private static final String POWER_NAME = "RBE902VC";
+    private static final int PROFILE_REMOTE = 0x0300;
+    private static final int PROFILE_POWER = 0x0301;
     private static final String LOG_TAG = "RBE_SCAN";
     private static final int PERMISSION_REQUEST = 1;
     private static final int SCAN_PERMISSION_REQUEST = 2;
@@ -178,12 +180,24 @@ public final class MainActivity extends Activity {
     private BluetoothGattCharacteristic consumerReport;
     /** Report 9 (System Control, 1 byte, usage 0x81 = System Power Down). */
     private BluetoothGattCharacteristic systemReport;
+    /** PnP ID 特征，切档时要改它的值（电视重连时才读）。 */
+    private BluetoothGattCharacteristic pnpIdChar;
     private BluetoothDevice connected;
     private String formerName;
     private boolean notificationsEnabled;
+    /** 报表 9 的 CCCD 状态；电源键必须等它订阅完，不能只看键盘报表。 */
+    private boolean systemNotificationsEnabled;
     /** 电源一键关机：切到电源档后，等电视订阅完成再发 System Power Down。 */
     private boolean pendingPower;
+    private boolean powerSent;
+    private boolean powerPollArmed;
+    private long powerConnectedAt;
+    private long powerSubscriptionAt;
+    private Runnable powerRestoreFallback;
     private boolean advertising;
+    /** 防止重连时重复调用 startAdvertising；连接建立后要能撤掉待执行的广播。 */
+    private boolean advertiseStartPending;
+    private Runnable advertiseStartTask;
     private boolean scanning;
     private boolean scanSession;
     private int scanChunk;
@@ -215,13 +229,13 @@ public final class MainActivity extends Activity {
 
     /** 当前该用的蓝牙名：厂商模式用 "CH BT RC"，电源模式换一个没有对应 .kl 的名字。 */
     private String activeName() {
-        int pid = prefs == null ? 0x0300 : prefs.getInt("pid", 0x0300);
-        return pid == 0x0300 ? REMOTE_NAME : POWER_NAME;
+        int pid = prefs == null ? PROFILE_REMOTE : prefs.getInt("pid", PROFILE_REMOTE);
+        return pid == PROFILE_REMOTE ? REMOTE_NAME : POWER_NAME;
     }
 
     /** PnP ID 值：bit0=2（USB-IF），VID 0x0416，PID 取 prefs（默认 0x0300），版本 0x0111。 */
     private byte[] pnpIdValue() {
-        int pid = prefs == null ? 0x0300 : prefs.getInt("pid", 0x0300);
+        int pid = prefs == null ? PROFILE_REMOTE : prefs.getInt("pid", PROFILE_REMOTE);
         return new byte[]{2, 0x16, 0x04, (byte) (pid & 0xFF), (byte) ((pid >> 8) & 0xFF), 0x11, 0x01};
     }
 
@@ -237,6 +251,8 @@ public final class MainActivity extends Activity {
         super.onCreate(state);
         current = this;
         prefs = getSharedPreferences("rbe", MODE_PRIVATE);
+        // 每次冷启动都回到普通遥控档，避免上次关机异常退出后卡在只有电源键有效的档位。
+        prefs.edit().putInt("pid", PROFILE_REMOTE).apply();
         // 允许用 adb 直接预置网络参数：
         //   am start -n org.local.rbe902vc/.MainActivity --es tvHost 192.168.3.17 --es tvToken rbe9k2
         if (getIntent() != null) {
@@ -908,7 +924,8 @@ public final class MainActivity extends Activity {
         // PID 0x0300 命中电视的 Vendor_0416_Product_0300.kl（里面对 POWER 是注释掉的）；
         // 换成电视上没有对应键位表的 PID（例如 0x0301），Android 会回落到 Generic.kl，
         // 而 Generic.kl 里 key 116 POWER 是开着的 —— 这是 BLE 关机的唯一通道。
-        info.addCharacteristic(readOnly(PNP_ID, pnpIdValue()));
+        pnpIdChar = readOnly(PNP_ID, pnpIdValue());
+        info.addCharacteristic(pnpIdChar);
         services.add(info);
 
         BluetoothGattService battery = new BluetoothGattService(BATTERY_SERVICE,
@@ -986,8 +1003,11 @@ public final class MainActivity extends Activity {
     }
 
     private void startAdvertising() {
-        main.postDelayed(() -> {
-            if (server == null || advertiser == null) return;
+        if (advertiseStartPending) return;
+        advertiseStartPending = true;
+        advertiseStartTask = () -> {
+            advertiseStartPending = false;
+            if (server == null || advertiser == null || advertising) return;
             AdvertiseSettings settings = new AdvertiseSettings.Builder()
                     .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
                     .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
@@ -999,9 +1019,17 @@ public final class MainActivity extends Activity {
             try {
                 advertiser.startAdvertising(settings, packet, response, advertiseCallback);
             } catch (IllegalArgumentException | SecurityException e) {
+                advertising = false;
                 show("广播包被系统拒绝：" + e.getMessage());
             }
-        }, 1000);
+        };
+        main.postDelayed(advertiseStartTask, 1000);
+    }
+
+    /** 连接建立或 GATT 停止时撤掉尚在排队的广播，避免链路已通却仍在发配对广播。 */
+    private void cancelPendingAdvertiseStart() {
+        if (advertiseStartTask != null) main.removeCallbacks(advertiseStartTask);
+        advertiseStartPending = false;
     }
 
     private final AdvertiseCallback advertiseCallback = new AdvertiseCallback() {
@@ -1036,16 +1064,42 @@ public final class MainActivity extends Activity {
                 // of 设置+音量减), so the TV's autopair plugin stops seeing the pairing advertisement.
                 // Keep advertising and the plugin finds it again, removes the bond and re-pairs in a
                 // loop. Stop the advertisement while the link is up, exactly like the remote does.
+                cancelPendingAdvertiseStart();
                 if (advertiser != null && advertising) {
                     advertiser.stopAdvertising(advertiseCallback);
                     advertising = false;
                 }
+                powerConnectedAt = System.currentTimeMillis();
+                powerSubscriptionAt = 0L;
+                if (pendingPower) {
+                    // 电源档重连必须等一条新的报表 9 订阅，不能拿上一次连接的旧 CCCD 值当依据。
+                    notificationsEnabled = false;
+                    systemNotificationsEnabled = false;
+                } else {
+                    notificationsEnabled = cccdEnabled(keyboardReport);
+                    systemNotificationsEnabled = cccdEnabled(systemReport);
+                }
                 show("电视已连接（配对状态 " + device.getBondState() + "）；等它订阅 HID 通知后即可按键。");
-                writeState("connected");
+                writeState("connected keyboardNotify=" + notificationsEnabled
+                        + " systemNotify=" + systemNotificationsEnabled);
+                if (pendingPower) armPowerReadyPoll();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 connected = null;
                 notificationsEnabled = false;
+                systemNotificationsEnabled = false;
+                powerSubscriptionAt = 0L;
+                if (powerSent) {
+                    // 电视已断电断链，这时才恢复本机档位，绝不在关机处理期间改档。
+                    restoreProfileLocally("tv disconnected after power");
+                    powerSent = false;
+                    main.removeCallbacks(powerTimeout);
+                }
+                resetCccd(keyboardReport);
+                resetCccd(systemReport);
+                cancelPowerRestoreFallback();
+                cancelPendingAdvertiseStart();
                 if (advertiser != null && !advertising) startAdvertising();
+                if (pendingPower) armPowerReadyPoll();
                 show("电视断开，已恢复广播等待重新连接。");
                 writeState("disconnected status=" + status);
             }
@@ -1076,17 +1130,26 @@ public final class MainActivity extends Activity {
                 int offset, byte[] value) {
             if (!preparedWrite && offset == 0) {
                 descriptor.setValue(value);
-                if (descriptor.getCharacteristic() == keyboardReport && CLIENT_CONFIG.equals(descriptor.getUuid())) {
-                    notificationsEnabled = Arrays.equals(value, BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                    if (notificationsEnabled) {
-                        show("电视已订阅遥控按键，可以测试方向与音量。");
-                        firePendingPower();
+                BluetoothGattCharacteristic characteristic = descriptor.getCharacteristic();
+                int reportId = reportIdOf(characteristic);
+                String report = reportId == 1 ? "keyboard"
+                        : reportId == 9 ? "system" : "id=" + reportId;
+                if (CLIENT_CONFIG.equals(descriptor.getUuid())) {
+                    boolean enabled = Arrays.equals(value, BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                    if (reportId == 1) {
+                        notificationsEnabled = enabled;
+                        if (enabled) show("电视已订阅遥控按键，可以测试方向与音量。");
+                    } else if (reportId == 9) {
+                        systemNotificationsEnabled = enabled;
+                        powerSubscriptionAt = enabled ? System.currentTimeMillis() : 0L;
+                        if (enabled) show("电视已重新订阅电源报表（报表 9），等待链路稳定后关机…");
                     }
                 }
-                writeState("cccd char=" + descriptor.getCharacteristic().getUuid()
-                        + " desc=" + descriptor.getUuid()
+                writeState("cccd report=" + report
+                        + " char=" + descriptor.getCharacteristic().getUuid()
                         + " value=" + toHex(value)
-                        + " notify=" + notificationsEnabled);
+                        + " keyboardNotify=" + notificationsEnabled
+                        + " systemNotify=" + systemNotificationsEnabled);
             }
             if (responseNeeded) server.sendResponse(device, requestId,
                     preparedWrite || offset != 0 ? BluetoothGatt.GATT_REQUEST_NOT_SUPPORTED : BluetoothGatt.GATT_SUCCESS,
@@ -1115,7 +1178,10 @@ public final class MainActivity extends Activity {
     // The real remote emits a fresh press every few tens of milliseconds while a direction or
     // volume key stays held, so holding a button here presses again on a timer instead of relying on
     // one long-down report that the TV's input stack may not repeat.
-    private static final long POWER_TIMEOUT_MILLIS = 60000L;
+    /** 电视自动配对要求 RSSI 优于 -50 dBm，重连可能比普通连接慢，给足 3 分钟。 */
+    private static final long POWER_TIMEOUT_MILLIS = 180000L;
+    /** 实测稳定电源档静置后再发报表 9 才可靠；新订阅完成后再等 30 秒。 */
+    private static final long POWER_SETTLE_MILLIS = 30000L;
     private static final long REPEAT_DELAY_MILLIS = 350;
     private static final long REPEAT_INTERVAL_MILLIS = 150;
 
@@ -1168,6 +1234,53 @@ public final class MainActivity extends Activity {
         return false;
     }
 
+    /** 读取 GATT 服务端保存的 CCCD 值；已配对设备重连时可能不会重新写一次订阅。 */
+    private boolean cccdEnabled(BluetoothGattCharacteristic characteristic) {
+        BluetoothGattDescriptor descriptor = characteristic == null
+                ? null : characteristic.getDescriptor(CLIENT_CONFIG);
+        return descriptor != null && Arrays.equals(descriptor.getValue(),
+                BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+    }
+
+    /** 回调给回来的特征可能是副本，用 Report Reference 里的报表 ID 判断才可靠。 */
+    private int reportIdOf(BluetoothGattCharacteristic characteristic) {
+        BluetoothGattDescriptor ref = characteristic == null
+                ? null : characteristic.getDescriptor(REPORT_REFERENCE);
+        byte[] value = ref == null ? null : ref.getValue();
+        return value == null || value.length == 0 ? -1 : value[0] & 0xFF;
+    }
+
+    /** 切档重连前清掉旧订阅，强制等电视在新链路上重新写 CCCD。 */
+    private void resetCccd(BluetoothGattCharacteristic characteristic) {
+        BluetoothGattDescriptor descriptor = characteristic == null
+                ? null : characteristic.getDescriptor(CLIENT_CONFIG);
+        if (descriptor != null) descriptor.setValue(BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE);
+    }
+
+    /** 电源走报表 9，必须检查它自己的 CCCD，不能拿键盘报表的订阅状态代替。 */
+    private boolean canSendPower() {
+        if (server != null && connected != null && systemNotificationsEnabled) return true;
+        writeState("blocked power server=" + (server != null) + " connected=" + (connected != null)
+                + " systemNotify=" + systemNotificationsEnabled);
+        show("电视尚未连接并订阅报表 9，无法发送关机键。");
+        return false;
+    }
+
+    /** 不重建 GATT 服务，原地更新 PnP ID，电视下次连接时就能读到新 PID。 */
+    private void setProfileValues(int pid) {
+        prefs.edit().putInt("pid", pid).apply();
+        if (pnpIdChar != null) pnpIdChar.setValue(pnpIdValue());
+    }
+
+    /** 改名可能偶发失败；成功与否交给调用方决定是否重试。 */
+    private boolean ensureAdapterName(String wanted) {
+        if (adapter == null) return false;
+        if (wanted.equals(adapter.getName())) return true;
+        boolean ok = adapter.setName(wanted);
+        writeState("setName=" + wanted + " ok=" + ok);
+        return ok;
+    }
+
     /**
      * Mirror the HID state into files/state.txt so a sweep can read it with
      * {@code adb shell run-as org.local.rbe902vc cat files/state.txt} without fighting the screen.
@@ -1175,6 +1288,7 @@ public final class MainActivity extends Activity {
     void writeState(String note) {
         String text = "connected=" + (connected == null ? "none" : connected.getAddress())
                 + " notify=" + notificationsEnabled
+                + " systemNotify=" + systemNotificationsEnabled
                 + " advertising=" + advertising
                 + " note=" + note;
         File dir = getExternalFilesDir(null);
@@ -1254,9 +1368,9 @@ public final class MainActivity extends Activity {
      * 键盘报表和 Consumer 报表这条路都不通（keylayout 里 POWER 全被注释，Consumer 0x30 也没反应），
      * 所以第 169 字节之后追加了这个 System Control collection。
      */
-    void sendPower() {
-        if (systemReport == null) { show("遥控器未启动：先点“连接电视（克隆广播）”。"); return; }
-        if (!canSend()) return;
+    boolean sendPower() {
+        if (systemReport == null) { show("遥控器未启动：先点“连接电视（克隆广播）”。"); return false; }
+        if (!canSendPower()) return false;
         BluetoothDevice target = connected;
         // 报表 9 的 System Power Down 是内核唯一会映射成 KEY_POWER(116) 的用法；
         // 至于 116 能不能变成 KEYCODE_POWER(26)，取决于电视给这个设备选哪张键位表：
@@ -1264,61 +1378,183 @@ public final class MainActivity extends Activity {
         // 换成 Generic.kl（改 PnP PID + 改蓝牙名）后 `key 116 POWER` 生效 → 真正关机。
         int result = server.notifyCharacteristicChanged(target, systemReport, false, new byte[]{1});
         writeState("power system usage=0x81 pid=0x"
-                + Integer.toHexString(prefs.getInt("pid", 0x0300)) + " result=" + result);
-        if (result != BluetoothStatusCodes.SUCCESS) { show("发送电源失败，状态 " + result); return; }
+                + Integer.toHexString(prefs.getInt("pid", PROFILE_REMOTE)) + " result=" + result);
+        if (result != BluetoothStatusCodes.SUCCESS) { show("发送电源失败，状态 " + result); return false; }
         show("已发送电源（System Power Down）。");
         main.postDelayed(() -> {
             if (server != null && connected == target)
                 server.notifyCharacteristicChanged(target, systemReport, false, new byte[]{0});
         }, 110);
+        return true;
     }
 
     /**
      * 一键 BLE 关机：厂商键位表把 116 注释掉了，所以要临时切到「电源档」——
      * PnP PID 0x0301 + 蓝牙名 RBE902VC，电视便会回落到 Generic.kl，那里 key 116 POWER 是开着的。
-     * 切档要重连，所以这里先停广播、改档、再广播，等电视连上并订阅后自动发一次 System Power Down。
+     *
+     * 关键是**不能关 GATT 服务**：以前 stopRemote() 再重建会在电视重连时留下空服务窗口，
+     * 触发 “No More Service found” 和解绑。这里保持同一个 GATT 服务，只原地更新 PnP ID、
+     * 改名、重广播并断开旧链路，让电视重连回同一个服务。
      */
     void powerOffViaBle() {
-        prefs.edit().putInt("pid", 0x0301).apply();
+        if (server == null || advertiser == null) {
+            show("先点“连接电视（克隆广播）”，等普通遥控档连上后再关机。");
+            return;
+        }
+        stopPowerWait();
+        setProfileValues(PROFILE_POWER);
+        if (!ensureAdapterName(POWER_NAME)) {
+            show("正在重试切换蓝牙名称 RBE902VC…");
+            main.postDelayed(() -> {
+                if (!ensureAdapterName(POWER_NAME)) {
+                    cancelPowerAttempt("无法把手机蓝牙名改成 RBE902VC");
+                    return;
+                }
+                beginPowerReconnect();
+            }, 1200);
+            return;
+        }
+        beginPowerReconnect();
+    }
+
+    private void beginPowerReconnect() {
         pendingPower = true;
-        stopRemote();
-        show("正在切到电源档（PID 0x0301 / 名称 RBE902VC）：把手机贴到电视底部，等它重连后自动关机…");
-        writeState("power-off requested");
-        requestStart(AdvMode.CLONE);
         main.removeCallbacks(powerTimeout);
         main.postDelayed(powerTimeout, POWER_TIMEOUT_MILLIS);
+        writeState("power-off requested keep-gatt pid=0x301");
+        show("正在切到电源档（RBE902VC）：保持 GATT 服务；请把手机贴到电视底部（RSSI 优于 -50 dBm），等电视重新配对后自动关机…");
+        reAdvertiseAndReconnect();
     }
+
+    private void cancelPowerAttempt(String reason) {
+        stopPowerWait();
+        setProfileValues(PROFILE_REMOTE);
+        ensureAdapterName(REMOTE_NAME);
+        show(reason + "，已取消关机并恢复遥控档。");
+        writeState("power cancelled, reverted to 0x300");
+    }
+
+    private void restoreRemoteProfile(String reason) {
+        setProfileValues(PROFILE_REMOTE);
+        if (!ensureAdapterName(REMOTE_NAME)) {
+            main.postDelayed(() -> ensureAdapterName(REMOTE_NAME), 1200);
+        }
+        writeState(reason + ", reverted to 0x300");
+        reAdvertiseAndReconnect();
+    }
+
+    /** 用当前名字重新广播（服务不关），再把现有链路断掉，让电视重连时重新读 PnP ID。 */
+    private void reAdvertiseAndReconnect() {
+        if (server == null || advertiser == null) { requestStart(AdvMode.CLONE); return; }
+        cancelPendingAdvertiseStart();
+        if (advertising) {
+            advertiser.stopAdvertising(advertiseCallback);
+            advertising = false;
+        }
+        startAdvertising();
+        BluetoothDevice target = connected;
+        if (target != null) {
+            server.cancelConnection(target);
+            show("保持 GATT 服务：已断开旧链路，等电视重连（10~20 秒）…");
+        } else {
+            if (pendingPower) armPowerReadyPoll();
+            show("保持 GATT 服务：正在广播，等电视连上…");
+        }
+    }
+
+    private void stopPowerWait() {
+        pendingPower = false;
+        powerSent = false;
+        powerPollArmed = false;
+        main.removeCallbacks(powerTimeout);
+        main.removeCallbacks(powerReadyPoll);
+        cancelPowerRestoreFallback();
+    }
+
+    private void cancelPowerRestoreFallback() {
+        if (powerRestoreFallback != null) main.removeCallbacks(powerRestoreFallback);
+        powerRestoreFallback = null;
+    }
+
+    /** 关机键已发出：先只把本机档位改回去，不主动断链，免得打断电视处理 POWER。 */
+    private void restoreProfileLocally(String reason) {
+        setProfileValues(PROFILE_REMOTE);
+        if (!ensureAdapterName(REMOTE_NAME)) {
+            main.postDelayed(() -> ensureAdapterName(REMOTE_NAME), 1200);
+        }
+        writeState(reason + ", local profile restored to 0x300");
+    }
+
+    /** 若电视 60 秒仍未断电，才主动重连回普通档，避免一直停在 Generic.kl。 */
+    private void schedulePowerRestoreFallback() {
+        cancelPowerRestoreFallback();
+        powerRestoreFallback = () -> {
+            powerRestoreFallback = null;
+            if (connected != null) reAdvertiseAndReconnect();
+        };
+        main.postDelayed(powerRestoreFallback, 60000L);
+    }
+
+    private void armPowerReadyPoll() {
+        if (!pendingPower || powerPollArmed) return;
+        powerPollArmed = true;
+        main.post(powerReadyPoll);
+    }
+
+    /** 重连期间轮询报表 9 的 CCCD：兼容电视重新写订阅和沿用旧 CCCD 两种情况。 */
+    private final Runnable powerReadyPoll = new Runnable() {
+        @Override public void run() {
+            if (!pendingPower || powerSent) { powerPollArmed = false; return; }
+            // 只认新连接上发生的报表 9 订阅；静置 30 秒，严格复现已验证的手动路径。
+            boolean linkSettled = System.currentTimeMillis() - powerConnectedAt >= 1200L;
+            boolean subscriptionSettled = powerSubscriptionAt > 0L
+                    && System.currentTimeMillis() - powerSubscriptionAt >= POWER_SETTLE_MILLIS;
+            if (server != null && connected != null && linkSettled
+                    && subscriptionSettled && systemNotificationsEnabled) {
+                powerPollArmed = false;
+                firePendingPower();
+                return;
+            }
+            main.postDelayed(this, 250);
+        }
+    };
 
     /** 电源档等了太久：切回遥控档，免得卡在只有电源键能用的状态。 */
     private final Runnable powerTimeout = new Runnable() {
         @Override public void run() {
-            if (!pendingPower) return;
-            pendingPower = false;
-            prefs.edit().putInt("pid", 0x0300).apply();
-            stopRemote();
-            show("电源档 60 秒内没等到电视重连，已切回遥控档；把手机贴到电视底部再试一次。");
-            writeState("power timeout, reverted to 0x0300");
+            if (!pendingPower && !powerSent) return;
+            boolean sent = powerSent;
+            stopPowerWait();
+            restoreRemoteProfile(sent ? "power sent but tv stayed connected" : "power timeout");
+            show(sent
+                    ? "已发送关机键但电视 180 秒内仍在线，已切回遥控档；请用手动切电源档方式复核。"
+                    : "电源档 180 秒内没等到电视重连，已切回遥控档；把手机贴到电视底部（RSSI 优于 -50 dBm）再试一次。");
         }
     };
 
     /** 连接并订阅之后调用：真正下发 System Power Down。 */
     private void firePendingPower() {
-        if (!pendingPower || !notificationsEnabled) return;
+        if (!pendingPower || !systemNotificationsEnabled || connected == null) return;
+        powerPollArmed = false;
+        main.removeCallbacks(powerReadyPoll);
         pendingPower = false;
+        if (!sendPower()) { cancelPowerAttempt("发送关机键失败"); return; }
+        // 发送成功后保持电源档和当前链路，直到电视断电触发 onDisconnected 才恢复。
+        powerSent = true;
         main.removeCallbacks(powerTimeout);
-        sendPower();
-        // 电视马上断电；2 秒后把档位和广播都切回遥控档，免得下次开机时手机还叫 RBE902VC。
-        main.postDelayed(() -> setProfile(0x0300), 2000);
+        main.postDelayed(powerTimeout, POWER_TIMEOUT_MILLIS);
     }
 
     /** 手动换档：0x0300 = 遥控档（全键位）、0x0301 = 电源档（Generic 键位表，只剩电源可用）。 */
     void setProfile(int pid) {
-        prefs.edit().putInt("pid", pid).apply();
-        pendingPower = false;
-        main.removeCallbacks(powerTimeout);
-        stopRemote();
-        requestStart(AdvMode.CLONE);
-        show(pid == 0x0300
+        stopPowerWait();
+        setProfileValues(pid);
+        if (!ensureAdapterName(activeName())) {
+            show("切换蓝牙名称失败，请重启手机蓝牙后重试。");
+            return;
+        }
+        reAdvertiseAndReconnect();
+        show(pid == PROFILE_REMOTE
                 ? "已切回遥控档（PID 0x0300 / CH BT RC），正在重连…"
                 : "已切到电源档（PID 0x0301 / RBE902VC），正在重连…这一档只有电源键有效。");
         writeState("profile pid=0x" + Integer.toHexString(pid));
@@ -1396,11 +1632,15 @@ public final class MainActivity extends Activity {
     }
 
     private void stopRemote() {
+        cancelPendingAdvertiseStart();
+        stopPowerWait();
+        setProfileValues(PROFILE_REMOTE);
         if (advertiser != null && advertising) advertiser.stopAdvertising(advertiseCallback);
         advertising = false;
         if (server != null) { server.clearServices(); server.close(); server = null; }
         connected = null;
         notificationsEnabled = false;
+        systemNotificationsEnabled = false;
         restoreName();
         show("已停止 BLE 广播并恢复手机蓝牙名称。");    }
 

@@ -12,6 +12,7 @@ import android.content.Intent;
  *   adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --es u B2,DD
  *   adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --es adv clone
  *   adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --ez power true
+ *   adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --ez powerFlow true
  *   adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --es consumer 30
  *   adb shell am broadcast -n org.local.rbe902vc/.SendReceiver -a org.local.rbe902vc.SEND --ez stop true
  * </pre>
@@ -26,10 +27,12 @@ public class SendReceiver extends BroadcastReceiver {
         String wifi = intent.getStringExtra("wifi");
         String pid = intent.getStringExtra("pid");
         boolean power = intent.getBooleanExtra("power", false);
+        boolean powerFlow = intent.getBooleanExtra("powerFlow", false);
         boolean stop = intent.getBooleanExtra("stop", false);
         if (usages != null) activity.sendHex(usages);
         if (adv != null) activity.startAdvertising(adv);
         if (power) activity.sendPower();
+        if (powerFlow) activity.powerOffViaBle();
         if (consumer != null) activity.sendConsumerHex(consumer);
         if (pid != null) activity.setPid(pid);
         if (wifi != null) {
