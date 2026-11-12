@@ -26,3 +26,6 @@
 # OS clutter
 Thumbs.db
 desktop.ini
+
+# uiautomator dumps from debugging
+/ui*.xml
