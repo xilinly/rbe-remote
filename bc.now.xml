@@ -1,0 +1,2070 @@
+<Bluedroid>
+    <N1 Tag="Local">
+        <N1 Tag="Adapter">
+            <N1 Tag="BluezMigrationDone" Type="int">1</N1>
+            <N2 Tag="Address" Type="string">bc:1c:81:85:f0:0f</N2>
+            <N3 Tag="LE_LOCAL_KEY_IR" Type="binary">12db9ca7d0e9fce927b33cafff5f3598</N3>
+            <N4 Tag="LE_LOCAL_KEY_IRK" Type="binary">0ad9aafa92adaae892adda238d66bdf5</N4>
+            <N5 Tag="LE_LOCAL_KEY_DHK" Type="binary">9dffda1f0172040e28a69096f22ea302</N5>
+            <N6 Tag="LE_LOCAL_KEY_ER" Type="binary">6aa65cc8f1c1850cf1c1ab6c6b6b95a8</N6>
+            <N7 Tag="ScanMode" Type="int">2</N7>
+            <N8 Tag="DiscoveryTimeout" Type="int">0</N8>
+            <N9 Tag="Name" Type="string">55F9_LJAC_AF92</N9>
+        </N1>
+        <N2 Tag="AutoPairBlacklist">
+            <N1 Tag="AddressBlacklist" Type="string">00:02:C7,00:16:FE,00:19:C1,00:1B:FB,00:1E:3D,00:21:4F,00:23:06,00:24:33,00:A0:79,00:0E:6D,00:13:E0,00:21:E8,00:60:57,00:0E:9F,00:12:1C,00:18:91,00:18:96,00:13:04,00:16:FD,00:22:A0,00:0B:4C,00:60:6F,00:23:3D,00:C0:59,00:0A:30,00:1E:AE,00:1C:D7,00:80:F0,00:12:8A,00:09:93,00:80:37,00:26:7E,00:26:e8</N1>
+            <N2 Tag="ExactNameBlacklist" Type="string">Motorola IHF1000,i.TechBlueBAND,X5 Stereo v1.3,KML_CAN</N2>
+            <N3 Tag="FixedPinZerosKeyboardBlacklist" Type="string">00:0F:F6</N3>
+            <N4 Tag="PartialNameBlacklist" Type="string">BMW,Audi,Parrot,Car</N4>
+        </N2>
+    </N1>
+    <N2 Tag="Remote">
+        <N1 Tag="54:92:6a:b3:cf:89">
+            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N2 Tag="Name" Type="string">midea</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">0</N4>
+            <N5 Tag="Timestamp" Type="int">1794320705</N5>
+            <N6 Tag="Manufacturer" Type="int">1704</N6>
+            <N7 Tag="LmpVer" Type="int">0</N7>
+            <N8 Tag="LmpSubVer" Type="int">0</N8>
+        </N1>
+        <N2 Tag="d4:27:87:ba:47:d9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="Name" Type="string">VWAB_87BA47D8</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">0</N4>
+            <N5 Tag="Timestamp" Type="int">1794320705</N5>
+            <N6 Tag="Manufacturer" Type="int">0</N6>
+            <N7 Tag="LmpVer" Type="int">0</N7>
+            <N8 Tag="LmpSubVer" Type="int">0</N8>
+        </N2>
+        <N3 Tag="00:e0:29:ec:f2:32">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">0</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N3>
+        <N4 Tag="2e:79:5f:3b:99:97">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N4>
+        <N5 Tag="42:f4:35:7c:f0:93">
+            <N1 Tag="Timestamp" Type="int">1794316226</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevClass" Type="int">1280</N3>
+            <N4 Tag="DevType" Type="int">2</N4>
+            <N5 Tag="Manufacturer" Type="int">0</N5>
+            <N6 Tag="LmpVer" Type="int">0</N6>
+            <N7 Tag="LmpSubVer" Type="int">0</N7>
+            <N8 Tag="AddrType" Type="int">1</N8>
+        </N5>
+        <N6 Tag="a0:59:50:a1:06:20">
+            <N1 Tag="Timestamp" Type="int">1794320581</N1>
+            <N2 Tag="DevClass" Type="int">0</N2>
+            <N3 Tag="DevType" Type="int">3</N3>
+            <N4 Tag="Manufacturer" Type="int">0</N4>
+            <N5 Tag="LmpVer" Type="int">0</N5>
+            <N6 Tag="LmpSubVer" Type="int">0</N6>
+            <N7 Tag="AddrType" Type="int">0</N7>
+            <N8 Tag="Name" Type="string">LAPTOP-XILINLY</N8>
+        </N6>
+        <N7 Tag="5e:79:66:64:9f:60">
+            <N1 Tag="Timestamp" Type="int">1794316089</N1>
+            <N2 Tag="DevClass" Type="int">7936</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="Manufacturer" Type="int">2502</N4>
+            <N5 Tag="LmpVer" Type="int">0</N5>
+            <N6 Tag="LmpSubVer" Type="int">0</N6>
+            <N7 Tag="AddrType" Type="int">1</N7>
+        </N7>
+        <N8 Tag="54:b8:74:c5:8d:e0">
+            <N1 Tag="Timestamp" Type="int">1794320580</N1>
+            <N2 Tag="Name" Type="string">midea</N2>
+            <N3 Tag="DevClass" Type="int">7936</N3>
+            <N4 Tag="DevType" Type="int">2</N4>
+            <N5 Tag="Manufacturer" Type="int">1704</N5>
+            <N6 Tag="LmpVer" Type="int">0</N6>
+            <N7 Tag="LmpSubVer" Type="int">0</N7>
+            <N8 Tag="AddrType" Type="int">0</N8>
+        </N8>
+        <N9 Tag="70:2c:2d:9f:9d:8d">
+            <N1 Tag="Timestamp" Type="int">1794316178</N1>
+            <N2 Tag="DevClass" Type="int">7936</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="Manufacturer" Type="int">2502</N4>
+            <N5 Tag="LmpVer" Type="int">0</N5>
+            <N6 Tag="LmpSubVer" Type="int">0</N6>
+            <N7 Tag="AddrType" Type="int">1</N7>
+        </N9>
+        <N10 Tag="53:e1:e8:6c:ac:aa">
+            <N1 Tag="Timestamp" Type="int">1794316209</N1>
+            <N2 Tag="DevClass" Type="int">7936</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="Manufacturer" Type="int">2502</N4>
+            <N5 Tag="LmpVer" Type="int">0</N5>
+            <N6 Tag="LmpSubVer" Type="int">0</N6>
+            <N7 Tag="AddrType" Type="int">1</N7>
+        </N10>
+        <N11 Tag="2c:1c:2c:e7:6d:25">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N11>
+        <N12 Tag="6c:7b:ed:79:56:30">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N12>
+        <N13 Tag="1a:25:46:26:90:f7">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N13>
+        <N14 Tag="48:aa:71:21:bb:59">
+            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N2 Tag="Name" Type="string">Arc5_Box</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N14>
+        <N15 Tag="56:2b:e0:4c:ce:02">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N15>
+        <N16 Tag="0b:e3:95:61:24:99">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N16>
+        <N17 Tag="50:b9:49:b4:56:0f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N17>
+        <N18 Tag="49:d6:17:e1:ec:51">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N18>
+        <N19 Tag="c0:e5:da:2c:f8:1e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="Name" Type="string">HIS-5BDE</N2>
+            <N3 Tag="DevType" Type="int">3</N3>
+            <N4 Tag="AddrType" Type="int">0</N4>
+        </N19>
+        <N20 Tag="60:83:79:28:65:13">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N20>
+        <N21 Tag="6d:10:ec:47:f1:b4">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N21>
+        <N22 Tag="77:fa:5a:e5:4b:01">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N22>
+        <N23 Tag="44:11:07:9f:e2:57">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N23>
+        <N24 Tag="5f:e3:92:8a:51:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N24>
+        <N25 Tag="59:43:6c:5a:e2:e9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N25>
+        <N26 Tag="78:fa:a7:f9:7f:8f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N26>
+        <N27 Tag="67:67:cb:02:bc:df">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N27>
+        <N28 Tag="02:67:e2:7e:49:9c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N28>
+        <N29 Tag="77:e2:72:f4:82:b9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N29>
+        <N30 Tag="62:a1:0c:13:5b:3a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N30>
+        <N31 Tag="4a:74:02:68:66:7c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N31>
+        <N32 Tag="50:97:62:38:52:4e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N32>
+        <N33 Tag="66:ae:61:7b:42:97">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N33>
+        <N34 Tag="4d:3f:21:5c:7b:51">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N34>
+        <N35 Tag="55:7d:46:dd:c5:84">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N35>
+        <N36 Tag="71:62:f1:fc:8c:c1">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N36>
+        <N37 Tag="58:9c:d8:fb:29:94">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N37>
+        <N38 Tag="5b:81:fd:8a:48:8f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N38>
+        <N39 Tag="50:58:d9:d1:82:3a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N39>
+        <N40 Tag="77:55:86:8c:af:00">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N40>
+        <N41 Tag="46:73:31:96:71:18">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N41>
+        <N42 Tag="67:ad:d9:f0:70:7b">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N42>
+        <N43 Tag="51:fd:3c:33:c2:84">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N43>
+        <N44 Tag="4d:5b:c7:84:1d:e3">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N44>
+        <N45 Tag="18:44:92:c9:57:1e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N45>
+        <N46 Tag="5e:3c:ee:1a:6b:14">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N46>
+        <N47 Tag="44:5e:df:aa:04:8f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N47>
+        <N48 Tag="6b:cf:77:bf:3d:d9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N48>
+        <N49 Tag="69:8c:e5:76:fb:6b">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N49>
+        <N50 Tag="44:db:58:f1:db:9a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N50>
+        <N51 Tag="6d:20:7e:d7:ea:d2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N51>
+        <N52 Tag="72:6f:b1:3f:8d:63">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N52>
+        <N53 Tag="51:bf:db:84:79:ad">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N53>
+        <N54 Tag="5a:2f:83:ea:20:26">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N54>
+        <N55 Tag="41:be:44:50:d2:fc">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N55>
+        <N56 Tag="65:e4:25:3b:e3:9f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N56>
+        <N57 Tag="4f:1f:42:c1:28:27">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N57>
+        <N58 Tag="4f:61:e9:03:fb:57">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N58>
+        <N59 Tag="48:a5:27:0c:2d:72">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N59>
+        <N60 Tag="58:88:11:6c:f7:34">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N60>
+        <N61 Tag="5b:d7:fa:c1:8b:1c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N61>
+        <N62 Tag="44:66:39:22:3f:5d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N62>
+        <N63 Tag="5f:19:8c:71:9b:12">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N63>
+        <N64 Tag="70:a9:ef:3e:10:6c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N64>
+        <N65 Tag="01:f2:2a:a7:1e:3d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N65>
+        <N66 Tag="68:28:4f:58:8e:d2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N66>
+        <N67 Tag="54:09:0e:55:c8:20">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N67>
+        <N68 Tag="5f:08:c5:03:d4:bb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N68>
+        <N69 Tag="5a:64:a2:e1:f1:93">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N69>
+        <N70 Tag="79:af:5a:9a:29:07">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N70>
+        <N71 Tag="76:dc:39:25:89:cb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N71>
+        <N72 Tag="75:05:78:bf:60:3c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N72>
+        <N73 Tag="66:c4:e4:83:69:37">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N73>
+        <N74 Tag="68:41:53:50:5e:8a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N74>
+        <N75 Tag="71:0e:da:7b:25:00">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N75>
+        <N76 Tag="77:51:fb:85:fa:f6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N76>
+        <N77 Tag="55:ec:cd:54:34:a4">
+            <N1 Tag="Timestamp" Type="int">1794320576</N1>
+            <N2 Tag="DevClass" Type="int">7936</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="Manufacturer" Type="int">2502</N4>
+            <N5 Tag="LmpVer" Type="int">0</N5>
+            <N6 Tag="LmpSubVer" Type="int">0</N6>
+            <N7 Tag="AddrType" Type="int">1</N7>
+        </N77>
+        <N78 Tag="63:a1:bb:81:17:10">
+            <N1 Tag="Timestamp" Type="int">1794320705</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevClass" Type="int">1280</N3>
+            <N4 Tag="DevType" Type="int">2</N4>
+            <N5 Tag="Manufacturer" Type="int">0</N5>
+            <N6 Tag="LmpVer" Type="int">0</N6>
+            <N7 Tag="LmpSubVer" Type="int">0</N7>
+            <N8 Tag="AddrType" Type="int">1</N8>
+        </N78>
+        <N79 Tag="65:26:47:6d:54:44">
+            <N1 Tag="Timestamp" Type="int">1794320636</N1>
+            <N2 Tag="DevClass" Type="int">7936</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="Manufacturer" Type="int">2502</N4>
+            <N5 Tag="LmpVer" Type="int">0</N5>
+            <N6 Tag="LmpSubVer" Type="int">0</N6>
+            <N7 Tag="AddrType" Type="int">1</N7>
+        </N79>
+        <N80 Tag="56:a7:2a:d2:b2:80">
+            <N1 Tag="Timestamp" Type="int">1794320696</N1>
+            <N2 Tag="DevClass" Type="int">7936</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="Manufacturer" Type="int">2502</N4>
+            <N5 Tag="LmpVer" Type="int">0</N5>
+            <N6 Tag="LmpSubVer" Type="int">0</N6>
+            <N7 Tag="AddrType" Type="int">1</N7>
+        </N80>
+        <N81 Tag="69:5d:76:1b:17:f5">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N81>
+        <N82 Tag="33:56:fa:00:9e:56">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N82>
+        <N83 Tag="69:5f:db:e5:8c:01">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N83>
+        <N84 Tag="59:96:9a:2a:02:e5">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N84>
+        <N85 Tag="5a:cd:d0:25:b0:19">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N85>
+        <N86 Tag="03:e2:6a:12:50:c4">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N86>
+        <N87 Tag="38:7d:0c:70:91:dd">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N87>
+        <N88 Tag="46:8b:80:43:8a:eb">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N88>
+        <N89 Tag="03:b4:98:09:75:48">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N89>
+        <N90 Tag="5a:4f:69:1c:4f:ad">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N90>
+        <N91 Tag="70:83:21:96:de:a9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N91>
+        <N92 Tag="20:01:b3:19:d2:d3">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N92>
+        <N93 Tag="47:ff:01:67:d2:7d">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N93>
+        <N94 Tag="7c:18:ef:df:73:c5">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N94>
+        <N95 Tag="1e:a3:0c:3b:38:c2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N95>
+        <N96 Tag="7e:54:20:41:57:cf">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="Name" Type="string">Arc5_Box</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N96>
+        <N97 Tag="68:75:65:c9:3f:67">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N97>
+        <N98 Tag="70:a6:bd:11:63:40">
+            <N1 Tag="Manufacturer" Type="int">70</N1>
+            <N2 Tag="LmpVer" Type="int">12</N2>
+            <N3 Tag="LmpSubVer" Type="int">0</N3>
+        </N98>
+        <N99 Tag="e4:74:50:16:1e:2f">
+            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N2 Tag="Name" Type="string">Cleer ARC 5</N2>
+            <N3 Tag="DevType" Type="int">3</N3>
+            <N4 Tag="AddrType" Type="int">0</N4>
+        </N99>
+        <N100 Tag="75:70:b7:dc:12:19">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N100>
+        <N101 Tag="2a:4e:38:75:fe:13">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N101>
+        <N102 Tag="20:23:06:36:8e:86">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="Name" Type="string">UAF026</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">0</N4>
+        </N102>
+        <N103 Tag="67:7d:2b:9f:7f:b4">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N103>
+        <N104 Tag="55:6e:e5:65:f6:35">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N104>
+        <N105 Tag="6f:8c:77:7c:4f:45">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N105>
+        <N106 Tag="66:64:d0:67:a5:bc">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N106>
+        <N107 Tag="64:e0:7b:2d:1b:24">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N107>
+        <N108 Tag="44:2c:29:d2:5a:dc">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N108>
+        <N109 Tag="12:15:ef:f5:0d:e8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N109>
+        <N110 Tag="5c:96:d0:b9:3a:2e">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N110>
+        <N111 Tag="66:a6:ec:9c:c1:a7">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N111>
+        <N112 Tag="5b:6a:9b:51:17:11">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N112>
+        <N113 Tag="76:9a:7e:a9:78:6a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N113>
+        <N114 Tag="56:34:97:db:8a:1f">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N114>
+        <N115 Tag="18:75:b5:28:2b:54">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N115>
+        <N116 Tag="54:e4:fd:e1:50:58">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N116>
+        <N117 Tag="51:be:00:e4:0a:a5">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N117>
+        <N118 Tag="56:a9:52:e3:1d:f7">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N118>
+        <N119 Tag="55:5c:d7:e0:e8:72">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N119>
+        <N120 Tag="59:25:72:ec:91:d7">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N120>
+        <N121 Tag="51:cf:18:e4:7b:bd">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N121>
+        <N122 Tag="7d:94:7b:69:38:6d">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N122>
+        <N123 Tag="18:df:c7:f8:cf:31">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N123>
+        <N124 Tag="71:97:d4:32:cc:49">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N124>
+        <N125 Tag="7e:10:a1:66:e6:fc">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N125>
+        <N126 Tag="52:51:b6:1c:c2:42">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N126>
+        <N127 Tag="77:1e:4d:1a:e9:d7">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N127>
+        <N128 Tag="5f:ee:25:b6:82:bd">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N128>
+        <N129 Tag="6b:6e:0e:4f:ee:55">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N129>
+        <N130 Tag="53:aa:40:b4:f8:d8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N130>
+        <N131 Tag="50:5f:b0:d8:0b:23">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N131>
+        <N132 Tag="47:b1:d6:ab:3d:c0">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N132>
+        <N133 Tag="4f:47:15:2d:84:7c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N133>
+        <N134 Tag="5d:6a:bb:6b:5a:5c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N134>
+        <N135 Tag="05:cb:03:c4:66:29">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N135>
+        <N136 Tag="4d:17:30:79:69:e2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N136>
+        <N137 Tag="49:06:21:b8:a6:d6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N137>
+        <N138 Tag="74:ba:51:55:6a:04">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N138>
+        <N139 Tag="52:d7:23:e7:63:86">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N139>
+        <N140 Tag="75:46:f4:b2:10:22">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N140>
+        <N141 Tag="5b:51:04:ee:e5:a1">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N141>
+        <N142 Tag="5b:0f:1a:67:0b:33">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N142>
+        <N143 Tag="78:cf:32:e1:f3:08">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N143>
+        <N144 Tag="74:e5:7a:a9:dd:dc">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N144>
+        <N145 Tag="65:b0:67:2c:94:7a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N145>
+        <N146 Tag="4f:9f:f3:be:2d:d3">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N146>
+        <N147 Tag="73:25:78:ee:bf:06">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N147>
+        <N148 Tag="79:95:9b:af:cf:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N148>
+        <N149 Tag="15:e8:1c:71:8f:7a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N149>
+        <N150 Tag="61:c2:64:e8:92:ee">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N150>
+        <N151 Tag="5f:28:bc:bf:06:25">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N151>
+        <N152 Tag="45:64:90:e5:4a:a2">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N152>
+        <N153 Tag="50:25:32:ba:27:7a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N153>
+        <N154 Tag="5a:dd:14:09:72:24">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N154>
+        <N155 Tag="55:88:c9:0c:50:2e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N155>
+        <N156 Tag="66:bd:d6:1f:06:af">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N156>
+        <N157 Tag="75:63:69:ea:7b:12">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N157>
+        <N158 Tag="62:8b:eb:07:19:c8">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N158>
+        <N159 Tag="42:8d:5b:85:f3:90">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N159>
+        <N160 Tag="5b:fb:9a:c4:26:58">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N160>
+        <N161 Tag="59:d6:01:7a:95:6c">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N161>
+        <N162 Tag="7b:61:e9:0c:52:78">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N162>
+        <N163 Tag="05:d4:b6:02:67:79">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N163>
+        <N164 Tag="72:48:37:b1:a0:29">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N164>
+        <N165 Tag="66:b6:6a:f3:81:d9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N165>
+        <N166 Tag="60:cd:95:37:37:dd">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N166>
+        <N167 Tag="64:dc:ba:9f:2b:4a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N167>
+        <N168 Tag="64:a0:d8:0b:df:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N168>
+        <N169 Tag="62:e3:20:a2:57:29">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N169>
+        <N170 Tag="7b:ed:dc:5b:01:f4">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N170>
+        <N171 Tag="62:25:b6:b9:d3:d7">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N171>
+        <N172 Tag="57:03:cd:e2:b7:68">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N172>
+        <N173 Tag="16:5b:b7:68:44:a2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N173>
+        <N174 Tag="42:b9:6e:b8:9f:54">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N174>
+        <N175 Tag="6f:1c:39:56:cd:20">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N175>
+        <N176 Tag="78:77:6a:fc:7e:61">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N176>
+        <N177 Tag="54:34:f9:e1:80:5c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N177>
+        <N178 Tag="6a:a5:f7:3b:ec:9d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N178>
+        <N179 Tag="79:8a:4b:7b:37:1d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N179>
+        <N180 Tag="44:bb:23:63:14:56">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N180>
+        <N181 Tag="50:ca:96:e5:7e:33">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N181>
+        <N182 Tag="47:f8:04:cc:15:6e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N182>
+        <N183 Tag="56:cd:77:e3:79:d2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N183>
+        <N184 Tag="6e:1c:07:0f:56:91">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N184>
+        <N185 Tag="4f:37:6a:e3:bc:f8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N185>
+        <N186 Tag="67:d1:10:6a:fd:03">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N186>
+        <N187 Tag="79:a0:83:05:69:a5">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N187>
+        <N188 Tag="5b:07:bd:ee:b3:18">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N188>
+        <N189 Tag="5c:72:a3:10:df:f3">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N189>
+        <N190 Tag="63:d8:f0:64:a8:95">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N190>
+        <N191 Tag="63:36:17:c3:8e:70">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N191>
+        <N192 Tag="74:93:4b:a6:9c:ca">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N192>
+        <N193 Tag="7e:aa:4a:b2:35:ee">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N193>
+        <N194 Tag="58:52:ed:a5:4a:9a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N194>
+        <N195 Tag="4c:40:f7:2b:7b:85">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N195>
+        <N196 Tag="52:03:52:29:a3:17">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N196>
+        <N197 Tag="d0:7b:6f:3f:8c:63">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="Name" Type="string">yunmai.scales.ms106</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">0</N4>
+        </N197>
+        <N198 Tag="5f:5f:24:0d:5f:c8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N198>
+        <N199 Tag="4a:8c:17:26:71:75">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N199>
+        <N200 Tag="63:6b:37:19:bc:6e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N200>
+        <N201 Tag="68:99:93:83:60:6e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N201>
+        <N202 Tag="76:85:7d:4e:73:e4">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N202>
+        <N203 Tag="57:1e:62:aa:2f:5d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N203>
+        <N204 Tag="43:88:80:d2:06:2f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N204>
+        <N205 Tag="75:72:42:7a:e9:2a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N205>
+        <N206 Tag="5a:ad:14:a2:a3:1d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N206>
+        <N207 Tag="77:d4:b7:69:8c:f9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N207>
+        <N208 Tag="55:b8:f7:e6:42:fe">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N208>
+        <N209 Tag="65:3d:f7:2f:c4:fd">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N209>
+        <N210 Tag="2b:c8:fc:c8:69:8a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N210>
+        <N211 Tag="44:cd:30:23:d8:97">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N211>
+        <N212 Tag="4b:12:43:cb:45:e2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N212>
+        <N213 Tag="75:b7:7b:30:7b:94">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N213>
+        <N214 Tag="77:dd:6d:bc:10:63">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N214>
+        <N215 Tag="7f:87:bf:48:5e:65">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N215>
+        <N216 Tag="6c:ce:ae:15:a8:a1">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N216>
+        <N217 Tag="62:db:00:8a:ef:58">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N217>
+        <N218 Tag="53:97:dc:33:3d:d1">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N218>
+        <N219 Tag="58:93:70:d2:3a:79">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N219>
+        <N220 Tag="58:a4:5f:30:81:62">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N220>
+        <N221 Tag="5d:75:a5:79:d6:43">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N221>
+        <N222 Tag="63:54:8a:49:96:42">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N222>
+        <N223 Tag="54:9b:89:80:bc:15">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N223>
+        <N224 Tag="53:ae:3c:b9:dd:9c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N224>
+        <N225 Tag="73:68:70:9f:9b:ec">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N225>
+        <N226 Tag="65:81:02:f6:bf:43">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N226>
+        <N227 Tag="6d:63:46:e9:f7:91">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N227>
+        <N228 Tag="77:08:c0:fb:31:5d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N228>
+        <N229 Tag="7a:59:17:21:18:0f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N229>
+        <N230 Tag="5e:ca:a8:b4:86:ab">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N230>
+        <N231 Tag="48:8f:e3:f7:a6:56">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N231>
+        <N232 Tag="67:cc:94:a0:d7:a7">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N232>
+        <N233 Tag="7c:ae:d2:20:a4:ac">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N233>
+        <N234 Tag="3a:bd:fc:c1:36:a0">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N234>
+        <N235 Tag="5b:b4:0e:b4:8b:1d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N235>
+        <N236 Tag="63:16:63:35:71:ad">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N236>
+        <N237 Tag="66:58:31:70:37:3e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N237>
+        <N238 Tag="4f:aa:19:76:5b:3c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N238>
+        <N239 Tag="d7:79:5e:80:25:67">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N239>
+        <N240 Tag="77:3a:1f:1f:42:df">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N240>
+        <N241 Tag="58:88:bb:d3:8b:48">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N241>
+        <N242 Tag="67:d6:dd:db:00:3d">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N242>
+        <N243 Tag="47:6e:90:e3:39:b3">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N243>
+        <N244 Tag="72:6b:50:da:44:34">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N244>
+        <N245 Tag="7e:a2:4f:f2:76:97">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N245>
+        <N246 Tag="6d:1d:d5:46:16:c7">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N246>
+        <N247 Tag="57:12:f8:a1:e9:74">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N247>
+        <N248 Tag="52:c0:f4:13:17:ca">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N248>
+        <N249 Tag="6f:36:cc:15:89:98">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N249>
+        <N250 Tag="5d:d3:01:7c:1e:a0">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N250>
+        <N251 Tag="68:d8:6f:f6:d8:76">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N251>
+        <N252 Tag="57:43:b6:c3:89:68">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N252>
+        <N253 Tag="0a:51:38:5d:61:ec">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N253>
+        <N254 Tag="5e:a6:a8:7c:5c:d6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N254>
+        <N255 Tag="48:ef:3e:3d:63:5d">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N255>
+        <N256 Tag="6f:ac:37:f2:26:1b">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N256>
+        <N257 Tag="75:76:87:50:0e:df">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N257>
+        <N258 Tag="77:4b:9d:75:a3:03">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N258>
+        <N259 Tag="78:2c:c6:bf:4b:50">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N259>
+        <N260 Tag="78:5e:b9:74:c5:bb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N260>
+        <N261 Tag="53:b3:07:a5:60:d8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N261>
+        <N262 Tag="77:0e:04:3e:cc:11">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N262>
+        <N263 Tag="52:f5:9a:de:f6:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N263>
+        <N264 Tag="64:e2:bf:2a:73:11">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N264>
+        <N265 Tag="40:08:a3:75:cd:b3">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N265>
+        <N266 Tag="5e:b5:ae:3b:64:dd">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N266>
+        <N267 Tag="4f:d6:15:22:42:04">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N267>
+        <N268 Tag="52:7c:20:e7:c8:85">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N268>
+        <N269 Tag="59:24:c7:76:3b:f8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N269>
+        <N270 Tag="42:53:fa:d1:c5:ce">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N270>
+        <N271 Tag="67:29:f1:1e:a9:c9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N271>
+        <N272 Tag="74:63:00:0d:4a:f8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N272>
+        <N273 Tag="59:70:00:54:a3:ec">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N273>
+        <N274 Tag="5c:95:71:d8:45:6c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N274>
+        <N275 Tag="4d:75:59:dd:db:bb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N275>
+        <N276 Tag="5c:d7:ed:8e:0f:7a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N276>
+        <N277 Tag="6e:fb:f1:10:e7:a8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N277>
+        <N278 Tag="29:29:66:08:84:bb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N278>
+        <N279 Tag="72:a6:8a:20:f6:3e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N279>
+        <N280 Tag="5a:98:87:cb:19:75">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N280>
+        <N281 Tag="60:42:f7:28:c1:8e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N281>
+        <N282 Tag="7c:80:a5:ce:4e:20">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N282>
+        <N283 Tag="55:8f:39:ce:8e:33">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N283>
+        <N284 Tag="72:93:85:3a:5f:fa">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N284>
+        <N285 Tag="45:b2:a6:b8:b8:87">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N285>
+        <N286 Tag="61:21:7c:5c:08:11">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N286>
+        <N287 Tag="46:6c:8f:46:25:d8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N287>
+        <N288 Tag="48:af:09:0d:a8:e8">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N288>
+        <N289 Tag="6f:77:5d:b6:da:5c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N289>
+        <N290 Tag="43:a9:f7:77:fe:b3">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N290>
+        <N291 Tag="5c:8a:0b:6f:ad:9f">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N291>
+        <N292 Tag="51:73:c5:8e:50:ad">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N292>
+        <N293 Tag="79:4f:10:ab:e1:a2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N293>
+        <N294 Tag="56:aa:a0:e3:1e:05">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N294>
+        <N295 Tag="7e:39:20:7d:50:dd">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N295>
+        <N296 Tag="6a:42:dd:cf:e4:c5">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N296>
+        <N297 Tag="60:db:cd:05:4a:5f">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N297>
+        <N298 Tag="11:80:a3:2f:5e:7b">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N298>
+        <N299 Tag="50:12:3b:08:0c:4f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N299>
+        <N300 Tag="52:53:6f:a5:ac:9a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N300>
+        <N301 Tag="70:0a:d3:d2:6c:b5">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N301>
+        <N302 Tag="59:66:c3:6d:67:b5">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N302>
+        <N303 Tag="7b:3d:32:a4:6d:74">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N303>
+        <N304 Tag="59:20:b2:15:cf:af">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N304>
+        <N305 Tag="60:68:bd:a5:dc:52">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N305>
+        <N306 Tag="4b:71:c4:ea:5d:bf">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N306>
+        <N307 Tag="79:05:e8:94:5f:d8">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N307>
+        <N308 Tag="26:e9:bb:62:52:c0">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N308>
+        <N309 Tag="7d:01:e6:12:1c:1c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N309>
+        <N310 Tag="5d:55:95:27:25:32">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N310>
+        <N311 Tag="6b:a1:71:50:1e:5d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N311>
+        <N312 Tag="6d:87:be:a3:ef:9f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N312>
+        <N313 Tag="54:78:bf:6a:07:01">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N313>
+        <N314 Tag="4d:17:45:5d:52:77">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N314>
+        <N315 Tag="71:db:56:06:4d:0d">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N315>
+        <N316 Tag="76:8f:67:57:14:24">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N316>
+        <N317 Tag="47:cd:7a:d4:fa:3b">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N317>
+        <N318 Tag="64:db:d4:1d:a7:5e">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N318>
+        <N319 Tag="41:fe:01:cd:40:00">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N319>
+        <N320 Tag="49:04:8a:2b:5c:da">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N320>
+        <N321 Tag="1e:ee:ee:2e:bb:2d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N321>
+        <N322 Tag="58:11:f8:e1:be:88">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N322>
+        <N323 Tag="4b:b9:e0:92:55:4c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N323>
+        <N324 Tag="6c:ea:ed:8f:19:61">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N324>
+        <N325 Tag="4c:d5:22:19:0a:5c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N325>
+        <N326 Tag="6b:c3:f4:d4:4b:aa">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N326>
+        <N327 Tag="5e:6a:c9:0b:a6:d1">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">RBE902VC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N327>
+        <N328 Tag="4c:dc:fa:ae:b0:30">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N328>
+        <N329 Tag="4d:a7:34:6b:57:ef">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N329>
+        <N330 Tag="78:c0:39:a4:c2:9d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N330>
+        <N331 Tag="66:1f:62:9e:19:92">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N331>
+        <N332 Tag="71:37:70:d6:f1:9a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N332>
+        <N333 Tag="7f:bc:3f:e2:e2:bf">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N333>
+        <N334 Tag="2d:c0:c9:ae:13:bc">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N334>
+        <N335 Tag="69:6d:61:4e:d6:49">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N335>
+        <N336 Tag="63:67:d0:bd:25:91">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="Name" Type="string">Arc5_Box</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N336>
+        <N337 Tag="46:6f:45:a6:12:94">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N337>
+        <N338 Tag="42:11:4f:0f:9c:02">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N338>
+        <N339 Tag="6d:f3:8b:2d:d3:ca">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N339>
+        <N340 Tag="42:fb:45:b9:16:c3">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N340>
+        <N341 Tag="25:dc:1a:5b:3b:42">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N341>
+        <N342 Tag="41:bf:41:46:75:ac">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N342>
+        <N343 Tag="73:c4:77:79:95:c8">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N343>
+        <N344 Tag="68:55:01:b9:39:28">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N344>
+        <N345 Tag="7d:fc:0d:f4:db:fa">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N345>
+        <N346 Tag="54:9e:b3:36:de:ce">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N346>
+        <N347 Tag="fd:ab:a1:6d:3c:59">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N347>
+        <N348 Tag="7f:a9:4d:06:a2:55">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N348>
+        <N349 Tag="64:80:21:9f:51:08">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N349>
+        <N350 Tag="09:86:30:39:32:44">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N350>
+        <N351 Tag="63:84:b1:ad:e1:d6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N351>
+        <N352 Tag="4e:e1:83:c5:6d:d0">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N352>
+        <N353 Tag="42:09:a0:5d:ed:dd">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N353>
+        <N354 Tag="77:2f:13:57:2e:fd">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N354>
+        <N355 Tag="7e:88:5b:2b:2f:1a">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N355>
+        <N356 Tag="67:bc:14:b4:2f:22">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N356>
+        <N357 Tag="68:5e:fa:b7:cf:f6">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N357>
+        <N358 Tag="7b:fc:f4:76:80:f1">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N358>
+        <N359 Tag="72:67:04:8e:cd:b6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N359>
+        <N360 Tag="53:cc:24:07:a7:f9">
+            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N2 Tag="Name" Type="string">NZXVIbTnK8xBlHkqKTo/7D58U</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N360>
+        <N361 Tag="45:1e:30:90:81:ac">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N361>
+        <N362 Tag="7a:66:51:2e:49:7b">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N362>
+        <N363 Tag="48:8b:62:12:bd:f9">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N363>
+        <N364 Tag="6d:bf:1c:05:eb:7a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N364>
+        <N365 Tag="7a:50:55:6b:cd:00">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N365>
+        <N366 Tag="7c:b5:26:bd:ac:fc">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N366>
+        <N367 Tag="e9:12:27:54:35:31">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N367>
+        <N368 Tag="69:98:d7:4b:6f:46">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N368>
+        <N369 Tag="54:b3:92:9c:5b:bf">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N369>
+        <N370 Tag="0e:60:67:14:12:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N370>
+        <N371 Tag="7e:7f:99:ce:53:8e">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N371>
+        <N372 Tag="57:73:17:66:be:80">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N372>
+        <N373 Tag="7e:d1:d4:87:98:18">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N373>
+        <N374 Tag="5c:68:ab:6a:90:67">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N374>
+        <N375 Tag="73:0f:ce:ca:78:77">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N375>
+        <N376 Tag="21:3d:a5:72:fe:26">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N376>
+        <N377 Tag="29:cd:13:76:f1:fb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N377>
+        <N378 Tag="64:b8:b7:20:c5:8b">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N378>
+        <N379 Tag="62:7a:98:f7:87:2a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N379>
+        <N380 Tag="41:34:35:98:a2:89">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N380>
+        <N381 Tag="5e:55:62:0d:cb:c0">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N381>
+        <N382 Tag="46:b3:66:3f:da:1f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N382>
+        <N383 Tag="4d:9a:99:b7:c2:0d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N383>
+        <N384 Tag="41:5e:7d:a1:24:0d">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N384>
+        <N385 Tag="33:3e:b7:08:a8:87">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N385>
+        <N386 Tag="d7:31:55:4e:7a:06">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N386>
+        <N387 Tag="5a:01:b0:2a:be:78">
+            <N1 Tag="DevClass" Type="int">7936</N1>
+            <N2 Tag="Name" Type="string">NZpXnegJdiZGFO6fDOgdC2LLM</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N387>
+        <N388 Tag="76:7a:b4:91:76:23">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N388>
+        <N389 Tag="4c:bd:b3:6b:70:66">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N389>
+        <N390 Tag="56:23:ac:97:fb:64">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N390>
+        <N391 Tag="7e:1a:62:d9:37:26">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N391>
+        <N392 Tag="61:8f:57:e5:86:10">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N392>
+        <N393 Tag="51:9e:94:70:2d:4c">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N393>
+        <N394 Tag="7f:b3:67:a6:64:71">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N394>
+        <N395 Tag="70:5a:66:1a:5d:fb">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N395>
+        <N396 Tag="77:9f:be:ef:da:3b">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N396>
+        <N397 Tag="6c:41:7c:42:aa:53">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N397>
+        <N398 Tag="43:5d:90:de:7a:45">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N398>
+        <N399 Tag="58:f1:57:aa:79:02">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N399>
+        <N400 Tag="11:f0:10:d4:ac:f6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N400>
+        <N401 Tag="6d:2b:23:7e:44:6b">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N401>
+        <N402 Tag="70:54:1c:b8:28:d5">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N402>
+        <N403 Tag="4d:de:f1:a5:0b:5d">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+        </N403>
+        <N404 Tag="45:c8:f2:f5:93:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N404>
+        <N405 Tag="44:4e:92:e9:ba:f2">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N405>
+        <N406 Tag="6b:67:18:6c:5a:16">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N406>
+        <N407 Tag="50:0d:e9:9d:6a:f4">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N407>
+        <N408 Tag="66:f4:25:8b:0c:66">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N408>
+        <N409 Tag="61:d4:98:0b:b4:59">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N409>
+        <N410 Tag="7a:b7:32:0c:1e:d6">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N410>
+        <N411 Tag="7a:93:30:bf:23:44">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N411>
+        <N412 Tag="4f:f2:1f:bd:fa:78">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N412>
+        <N413 Tag="6a:c8:26:32:9d:01">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N413>
+        <N414 Tag="48:5e:3b:94:9f:81">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N414>
+        <N415 Tag="4b:54:6c:ce:d0:9f">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N415>
+        <N416 Tag="7a:8d:34:ba:8f:ca">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N416>
+        <N417 Tag="58:cc:2e:c1:41:30">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N5>
+        </N417>
+        <N418 Tag="13:b3:2b:10:88:f1">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N418>
+        <N419 Tag="7d:9e:24:25:0b:9a">
+            <N1 Tag="DevClass" Type="int">0</N1>
+            <N2 Tag="DevType" Type="int">2</N2>
+        </N419>
+        <N420 Tag="72:bd:0c:4d:38:06">
+            <N1 Tag="DevClass" Type="int">1280</N1>
+            <N2 Tag="Name" Type="string">CH BT RC</N2>
+            <N3 Tag="DevType" Type="int">2</N3>
+            <N4 Tag="AddrType" Type="int">1</N4>
+            <N5 Tag="LE_KEY_PENC" Type="binary">6f48e5ec79366ddaf8ba06e5a71855211ecc2e1dbe4d20635bf00400</N5>
+            <N6 Tag="LE_KEY_PID" Type="binary">0018946db27cae8cac2b0eecd76701060070a6bd116340</N6>
+            <N7 Tag="LE_KEY_PCSRK" Type="binary">00000000717dfd280505bd127624c88a855433e504000000</N7>
+            <N8 Tag="LE_KEY_LENC" Type="binary">3ab21004</N8>
+            <N9 Tag="LE_KEY_LCSRK" Type="binary">000000003ab20400</N9>
+            <N10 Tag="Service" Type="string">00001812-0000-1000-8000-00805f9b34fb </N10>
+            <N11 Tag="HidReport" Type="binary">4d2a010100124d2a090101124d2a0102020e4d2afb02030e4d2afa02040e4d2a030105124d2a080106124d2afc0107124d2af80108124d2af9010912</N11>
+            <N12 Tag="HidAttrMask" Type="int">0</N12>
+            <N13 Tag="HidSubClass" Type="int">0</N13>
+            <N14 Tag="HidAppId" Type="int">255</N14>
+            <N15 Tag="HidVendorId" Type="int">1046</N15>
+            <N16 Tag="HidProductId" Type="int">768</N16>
+            <N17 Tag="HidVersion" Type="int">273</N17>
+            <N18 Tag="HidCountryCode" Type="int">0</N18>
+            <N19 Tag="HidSSRMaxLatency" Type="int">0</N19>
+            <N20 Tag="HidSSRMinTimeout" Type="int">0</N20>
+            <N21 Tag="HidDescriptor" Type="binary">05010906a1018501050719e029e71500250175019508810295017508810195057501050819012905910295017503910195067508150025ff0507190029ff8100c0050c0901a101850319002a9c021500269c02950175108100c0050c0901a101850895147508150025ff8100c0050c0901a10185fc95147508150026ff008100c0050c0901a10185f895147508150026ff008100c0050c0901a10185f995017508150026ff008100c005010980a1018509198129811500250175019501810295078101c0</N21>
+        </N420>
+    </N2>
+</Bluedroid>
