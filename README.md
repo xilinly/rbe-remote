@@ -100,40 +100,41 @@ adb shell cat /sdcard/Android/data/org.local.rbe902vc/files/state.txt
 # connected=BC:1C:81:xx:xx:xx notify=true advertising=false note=cccd char=00002a4d-... value=0100
 ```
 
-## 电源：BLE 关机已经打通（走 Generic 键位表）
+## 电源：BLE 关机打通（bind mount 打开 key 116 POWER）
 
-这台机器把 KEYCODE_POWER(26) 映射成**整机断电**。BLE 关卡在键位表上，逐个试过：
+这台机器把 KEYCODE_POWER(26) 映射成**整机断电**。BLE 关卡全在键位表上，逐条试过：
 
 | 试法 | 结果 |
 | --- | --- |
-| 键盘报表发扫描码 116（`0x74`） | `Vendor_0416_Product_0300.kl` 里 `key 116 POWER` 是注释的，keyCode 恒 0；而且用法码并不等于扫描码（0x74 被内核映射成 134） |
-| Consumer 页 0x30（Power） | 电视能收到（`recv report id: 03`），但内核不认成键 |
-| System Control 报表 9 的 **0x81 System Power Down** | 内核给出 `MSC_SCAN 00010081` → `EV_KEY KEY_POWER`，即 scancode 116；但厂商键位表把它映射成 keyCode 0 |
+| 键盘报表发扫描码 116（`0x74`） | 用法码 ≠ 扫描码：内核把 0x74 映射成 **134**，不是 116 |
+| Consumer 页 0x30（Power） | 电视能收到（`recv report id: 03`），内核不认成键 |
+| System Control 报表 9 的 **0x81 System Power Down** | 内核给出 `MSC_SCAN 00010081` → `EV_KEY KEY_POWER`（scancode 116），但 `Vendor_0416_Product_0300.kl` 里 `key 116 POWER` 被注释 → keyCode 0 |
 
-想给 116 补映射：`/system` 只读（`mount -o remount,rw /system` 返回 `Operation not permitted`，root + 全 Caps + SELinux Disabled 也拒），`/data/system/devices/keylayout/` 这个 ROM 不认（EventHub 明确解析到 `/system/usr/keylayout/...`）。
+补映射的老路都堵着：`mount -o remount,rw /system` 返回 `Operation not permitted`（root + 全 Caps + SELinux Disabled 也拒）；`/data/system/devices/keylayout/` 这个 ROM 不认；`nsenter` 不存在。
 
-**最后走通的做法：让电视挑 `Generic.kl`。** Android 的键位表查找顺序是 `Vendor_<vid>_Product_<pid>.kl` → 设备名 `.kl` → `Generic.kl`，而 `Generic.kl` 里 `key 116 POWER` 是开着的。所以：
+**最后走通的是 bind mount**：不重挂分区、不改 `/system` 一个字节，只把 `/data` 上的改好副本盖到键位表文件上。探测脚本 `tools/tv/probe_keylayout.sh` 的 5c 一步验证了这条路可行（`remount` 失败但 `mount -o bind` 成功）。
 
-1. PnP ID 换成电视上没有对应键位表的 `0x0416:0x0301`（ADR 里仍然带原有广播，autopair 照样认）；
-2. 蓝牙名从 `CH BT RC` 改成 `RBE902VC`（否则 EventHub 会按名字命中 `CH_BT_RC.kl`）；
-3. 电视新建的节点 `uhid 0005:0416:0301` 解析到 `/system/usr/keylayout/Generic.kl`；
-4. 发报表 9 的 System Power Down → 内核 scancode 116 → Generic.kl → **KEYCODE_POWER(26)** → ShutdownThread 整机断电。
+电视端部署（adb 已是 root）：
 
-实测证据：
-
-```
-getevent: EV_MSC MSC_SCAN 00010081 / EV_KEY KEY_POWER DOWN / UP
-电视 logcat: reportInfo:scancode=116;keyCode=26
-            I/ShutdownThread: Bluetooth turned off. / Shutting down MountService
+```bash
+adb push tools/tv/klbind.sh /data/local/keylayout/klbind.sh
+adb shell sh /data/local/keylayout/klbind.sh install    # 挂上（幂等）
+adb shell sh /data/local/keylayout/klbind.sh status     # 验收：要看到 key 116   POWER
+adb shell sh /data/local/keylayout/klbind.sh remove     # 还原原厂键位表
+adb push tools/tv/install_boot_hook.sh /data/local/tmp/ && adb shell sh /data/local/tmp/boot_hook.sh
 ```
 
-APP 里是一个按钮 **「电源（BLE 关机）」**：它自动切档（PID 0x0301 + 名字 RBE902VC）、重连、等电视订阅完成后发一次 System Power Down，然后把 PID 和蓝牙名切回 `0x0300 / CH BT RC`。
+- 只多出 `key 116 POWER` / `key 152 POWER` 两行，**厂商键位（换源/设置/观影/数字/频道）一行不改**；
+- 开机持久化：挂在 `/data/local/webremote/boot.sh` 里（该脚本由 `/system/etc/script/ch_system_init.sh` 以 root 调起），已实测重启后 `mount` 与 `key 116` 自动恢复，备份在 `boot.sh.bak.klbind`；
+- 生效时机：EventHub 只在**输入设备创建时**读键位表，所以改完要在手机上点一次「断开重连」。
 
-v3.7 的一键流程不再关闭并重建 GATT 服务，只原地更新 PnP ID、改名、重广播并断开旧链路；发送前必须等到新链路上报表 9 的 CCCD 重新订阅并静置 30 秒，发送后保持电源档和链路不变，直到电视断电触发断链才恢复普通档。电视的 Realtek autopair 要求 RSSI 优于 -50 dBm，因此按电源键后应把手机贴到电视底部；重连或发送后等待均放宽到 180 秒，超时会自动切回普通遥控档。
+实测结果：发报表 9 后电视 10 秒内从网络消失（整机断电）；`getevent` 里能看到 `EV_MSC MSC_SCAN 00010081` + `EV_KEY KEY_POWER DOWN/UP`。
 
-**开机做不到**：本机没有红外发射器，电视断电后只能用实体遥控器开。这也是为什么在「电源档」下厂商键位（换源/设置/导航/数字）会失效——那一档只用来关那一下，发完立刻切回。
+APP 里主界面 **「电源」** 就是发报表 9；调试区保留 `切到电源档 / 切回遥控档 / 电源备用 0x74 / 电源备用 C0x30` 这些历史通道，和「断开重连」「键位表状态」。
 
-> 电视上另有一个姊妹工程 webremote（busybox httpd + `input keyevent 26`），曾经是唯一能关机的手段；现在 BLE 已经不需要它了，仓库里的 WiFi 按钮只是保留的备用通道。
+> 备用方案（`Generic.kl` 切档：PnP PID 0x0301 + 蓝牙名 RBE902VC）不再需要：那档只有电源键有效，且每次切档电视会解绑、重新配对要输配对码。代码保留但只作调试用。
+
+**开机做不到**：本机没有红外发射器，电视断电后只能用实体遥控器开。
 
 ## 用法
 

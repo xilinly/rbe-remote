@@ -281,7 +281,7 @@ public final class MainActivity extends Activity {
 
         // ------------------------------------------------ 遥控器面板（按实体遥控器布局）
         root.addView(header("遥控器"));
-        root.addView(rowEven(button("电源（BLE 关机）", v -> powerOffViaBle()),
+        root.addView(rowEven(button("电源", v -> sendPower()),
                 button("设置", v -> sendKeys(SETTINGS_KEY))));
 
         root.addView(rowEven(button("菜单", v -> sendKeys(MENU_KEY)),
@@ -338,6 +338,8 @@ public final class MainActivity extends Activity {
                 button("切回遥控档", v -> setProfile(0x0300))));
         root.addView(rowEven(button("电源备用 0x74", v -> sendPowerScancode()),
                 button("电源备用 C0x30", v -> sendPowerConsumer())));
+        root.addView(rowEven(button("断开重连", v -> { stopRemote(); main.postDelayed(() -> requestStart(AdvMode.CLONE), 800); }),
+                button("键位表状态", v -> showKlHint())));
 
         custom = new EditText(this);
         custom.setHint("自定义 usage（十六进制，可逗号分隔，如 D5 或 B2,DD）");
@@ -1441,6 +1443,13 @@ public final class MainActivity extends Activity {
         }
         writeState(reason + ", reverted to 0x300");
         reAdvertiseAndReconnect();
+    }
+
+    /** 一句提示：键位表是不是被 bind mount 打开了（app 无 root，读不到 /system，只能给命令）。 */
+    private void showKlHint() {
+        show("键位表检查（电视上执行）：\n"
+                + "sh /data/local/keylayout/klbind.sh status\n"
+                + "要看到 key 116   POWER  才是打开状态；装/卸用 install / remove。");
     }
 
     /** 用当前名字重新广播（服务不关），再把现有链路断掉，让电视重连时重新读 PnP ID。 */
